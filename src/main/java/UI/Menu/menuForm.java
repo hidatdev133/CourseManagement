@@ -4,6 +4,7 @@
  */
 package UI.Menu;
 
+<<<<<<< Updated upstream
 /**
  *
  * @author Dat dep trai
@@ -13,6 +14,21 @@ public class menuForm extends javax.swing.JFrame {
     /**
      * Creates new form menuForm
      */
+=======
+import UI.StudentGrade.studentGradePanel;
+import UI.StudentGrade.studentGradePanel;
+import javax.swing.ImageIcon;
+import java.awt.CardLayout;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class menuForm extends javax.swing.JFrame {
+
+    private JPanel childPanel;
+
+>>>>>>> Stashed changes
     public menuForm() {
         initComponents();
     }
@@ -26,25 +42,243 @@ public class menuForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< Updated upstream
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+=======
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnHomePage = new javax.swing.JButton();
+        btnTeacher = new javax.swing.JButton();
+        btnStudentGrade = new javax.swing.JButton();
+        btnCourseInstructor = new javax.swing.JButton();
+        btnOnlineCourse = new javax.swing.JButton();
+        btnOnsiteCourse = new javax.swing.JButton();
+        btnStudent = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("ADMINISTRATOR");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/Admin-icon.png"))); // NOI18N
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/online.png"))); // NOI18N
+        jLabel3.setText("Online");
+
+        btnHomePage.setBackground(new java.awt.Color(102, 102, 255));
+        btnHomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/home-page.png"))); // NOI18N
+        btnHomePage.setText("Trang chủ");
+        btnHomePage.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnHomePage.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnHomePage.setPreferredSize(new java.awt.Dimension(123, 54));
+        btnHomePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomePageActionPerformed(evt);
+            }
+        });
+
+        btnTeacher.setBackground(new java.awt.Color(0, 204, 51));
+        btnTeacher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/teacher.png"))); // NOI18N
+        btnTeacher.setText("Teacher");
+        btnTeacher.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnTeacher.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnTeacher.setPreferredSize(new java.awt.Dimension(123, 54));
+        btnTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeacherActionPerformed(evt);
+            }
+        });
+
+        btnStudentGrade.setBackground(new java.awt.Color(0, 204, 51));
+        btnStudentGrade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/student-grades.png"))); // NOI18N
+        btnStudentGrade.setText("Student Grade");
+        btnStudentGrade.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnStudentGrade.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnStudentGrade.setPreferredSize(new java.awt.Dimension(123, 54));
+        btnStudentGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudentGradeActionPerformed(evt);
+            }
+        });
+
+        btnCourseInstructor.setBackground(new java.awt.Color(0, 204, 51));
+        btnCourseInstructor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/course-instructor.png"))); // NOI18N
+        btnCourseInstructor.setText("Course Intructor");
+        btnCourseInstructor.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnCourseInstructor.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnCourseInstructor.setPreferredSize(new java.awt.Dimension(123, 54));
+        btnCourseInstructor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCourseInstructorActionPerformed(evt);
+            }
+        });
+
+        btnOnlineCourse.setBackground(new java.awt.Color(0, 204, 51));
+        btnOnlineCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/online-course.png"))); // NOI18N
+        btnOnlineCourse.setText("Online Course");
+        btnOnlineCourse.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnOnlineCourse.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnOnlineCourse.setPreferredSize(new java.awt.Dimension(123, 54));
+        btnOnlineCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOnlineCourseActionPerformed(evt);
+            }
+        });
+
+        btnOnsiteCourse.setBackground(new java.awt.Color(0, 204, 51));
+        btnOnsiteCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/onsite-course.png"))); // NOI18N
+        btnOnsiteCourse.setText("Onsite Course");
+        btnOnsiteCourse.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnOnsiteCourse.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnOnsiteCourse.setPreferredSize(new java.awt.Dimension(123, 54));
+
+        btnStudent.setBackground(new java.awt.Color(0, 204, 51));
+        btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/student.png"))); // NOI18N
+        btnStudent.setText("Student");
+        btnStudent.setMaximumSize(new java.awt.Dimension(123, 54));
+        btnStudent.setMinimumSize(new java.awt.Dimension(123, 54));
+        btnStudent.setPreferredSize(new java.awt.Dimension(123, 54));
+        btnStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudentActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTeacher, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnStudentGrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCourseInstructor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnOnlineCourse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnOnsiteCourse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnStudentGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCourseInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnOnlineCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnOnsiteCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+>>>>>>> Stashed changes
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+=======
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> Stashed changes
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< Updated upstream
     /**
      * @param args the command line arguments
      */
+=======
+    private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnStudentActionPerformed
+
+    private void btnOnlineCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnlineCourseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOnlineCourseActionPerformed
+
+    private void btnCourseInstructorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseInstructorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCourseInstructorActionPerformed
+
+    private void btnStudentGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentGradeActionPerformed
+        showPanel(new studentGradePanel());
+
+    }//GEN-LAST:event_btnStudentGradeActionPerformed
+
+    private void showPanel(JPanel panel) {
+        childPanel = panel;
+        jPanel2.removeAll();
+        jPanel2.add(childPanel);
+        jPanel2.validate();
+    }
+
+    private void btnTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTeacherActionPerformed
+
+    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHomePageActionPerformed
+
+>>>>>>> Stashed changes
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -78,5 +312,23 @@ public class menuForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< Updated upstream
     // End of variables declaration//GEN-END:variables
+=======
+    private javax.swing.JButton btnCourseInstructor;
+    private javax.swing.JButton btnHomePage;
+    private javax.swing.JButton btnOnlineCourse;
+    private javax.swing.JButton btnOnsiteCourse;
+    private javax.swing.JButton btnStudent;
+    private javax.swing.JButton btnStudentGrade;
+    private javax.swing.JButton btnTeacher;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    // End of variables declaration//GEN-END:variables
+
+>>>>>>> Stashed changes
 }
