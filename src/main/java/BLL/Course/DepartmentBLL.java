@@ -8,6 +8,6 @@ package BLL.Course;
  *
  * @author Acer
  */
-public class OnlineCourse {
+public class DepartmentBLL {
     
 }

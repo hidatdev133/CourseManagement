@@ -8,6 +8,6 @@ package BLL.Person;
  *
  * @author Acer
  */
-public class Teacher {
+public class TeacherBLL {
     
 }

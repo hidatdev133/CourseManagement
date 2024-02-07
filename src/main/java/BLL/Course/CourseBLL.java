@@ -1,4 +1,4 @@
 package BLL.Course;
-public class Course {
+public class CourseBLL {
     
 }

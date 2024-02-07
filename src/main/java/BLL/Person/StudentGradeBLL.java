@@ -4,11 +4,11 @@ import DAL.StudentGrade.StudentGradeDAL;
 import java.sql.SQLException;
 import java.util.List;
 
-public class StudentGrade {
+public class StudentGradeBLL {
 
     private StudentGradeDAL studentGradeDAL;
 
-    public StudentGrade() {
+    public StudentGradeBLL() {
         this.studentGradeDAL = new StudentGradeDAL();
     }
 

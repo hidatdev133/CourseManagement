@@ -108,11 +108,11 @@ public class StudentGradeDAL extends ConnectDB {
         }
         return false;
     }
-    
-     public boolean editStudentGrade(int EnrollmentID,int CourseID , int StudentID , float Grade){
+
+    public boolean editStudentGrade(int EnrollmentID, int CourseID, int StudentID, float Grade) {
         try {
-            String query = "UPDATE studentgrade SET `CourseID`=?,`StudentID`=?,`Grade`=? WHERE `EnrollmentID` = '"+EnrollmentID+"'";
-            PreparedStatement stament=this.getConnection().prepareStatement(query);
+            String query = "UPDATE studentgrade SET `CourseID`=?,`StudentID`=?,`Grade`=? WHERE `EnrollmentID` = '" + EnrollmentID + "'";
+            PreparedStatement stament = this.getConnection().prepareStatement(query);
             stament.setInt(1, CourseID);
             stament.setInt(2, StudentID);
             stament.setFloat(3, Grade);
@@ -122,8 +122,8 @@ public class StudentGradeDAL extends ConnectDB {
         }
         return false;
     }
-     
-     public List getCourseIDFromStudentGrade(int courseID) throws SQLException {
+
+    public List getCourseIDFromStudentGrade(int courseID) throws SQLException {
 
         String query = "SELECT CourseID FROM studentgrade WHERE CourseID = ?";
 
@@ -143,8 +143,8 @@ public class StudentGradeDAL extends ConnectDB {
         return list;
 
     }
-     
-     public List getStudentIDFromStudentGrade(int studentID) throws SQLException {
+
+    public List getStudentIDFromStudentGrade(int studentID) throws SQLException {
 
         String query = "SELECT StudentID FROM studentgrade WHERE StudentID = ? ";
 
@@ -157,7 +157,7 @@ public class StudentGradeDAL extends ConnectDB {
 
             while (rs.next()) {
 
-                StudentGrade s = new StudentGrade(); 
+                StudentGrade s = new StudentGrade();
                 s.setStudentID(rs.getInt("StudentID"));
                 list.add(s);
             }
