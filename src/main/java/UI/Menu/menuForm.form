@@ -154,9 +154,13 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="1" min="-2" pref="59" max="-2" attributes="0"/>
                   </Group>
@@ -210,10 +214,14 @@
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/Admin-icon.png"/>
 =======
               <Image iconType="3" name="/Icon/Admin-icon.png"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+              <Image iconType="3" name="/Icon/Admin-icon.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
           </Properties>
         </Component>
@@ -224,17 +232,24 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/online.png"/>
 =======
               <Image iconType="3" name="/Icon/online.png"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+              <Image iconType="3" name="/Icon/online.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Online"/>
           </Properties>
         </Component>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="btnHomePage">
 =======
+=======
+>>>>>>> parent of 46261b3 (update res/ui/icon)
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -250,10 +265,14 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/home-page.png"/>
 =======
               <Image iconType="3" name="/Icon/home-page.png"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+              <Image iconType="3" name="/Icon/home-page.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Trang ch&#x1ee7;"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -284,18 +303,13 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/teacher.png"/>
+=======
+              <Image iconType="3" name="/Icon/teacher.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Teacher"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeacherActionPerformed"/>
@@ -319,18 +333,13 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/student-grades.png"/>
+=======
+              <Image iconType="3" name="/Icon/student grade.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Student Grade"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStudentGradeActionPerformed"/>
@@ -354,10 +363,14 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/course-instructor.png"/>
 =======
               <Image iconType="3" name="/Icon/course intructor.png"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+              <Image iconType="3" name="/Icon/course intructor.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Course Intructor"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -388,10 +401,14 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/online-course.png"/>
 =======
               <Image iconType="3" name="/Icon/online-course.png"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+              <Image iconType="3" name="/Icon/online-course.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Online Course"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -422,10 +439,14 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/onsite-course.png"/>
 =======
               <Image iconType="3" name="/Icon/onsite course.png"/>
 >>>>>>> parent of 0453504 (dit me thg Pham Quoc Dat)
+=======
+              <Image iconType="3" name="/Icon/onsite course.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Onsite Course"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -450,18 +471,13 @@
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Image iconType="3" name="/UI/icon/student.png"/>
+=======
+              <Image iconType="3" name="/Icon/student.png"/>
+>>>>>>> parent of 46261b3 (update res/ui/icon)
             </Property>
             <Property name="text" type="java.lang.String" value="Student"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[123, 54]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStudentActionPerformed"/>
