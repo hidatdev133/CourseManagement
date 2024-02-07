@@ -1,5 +1,6 @@
 package DAL.StudentGrade;
 
+
 public class StudentGrade {
     private int EnrollmentID, CourseID, StudentID;
     private float Grade;
