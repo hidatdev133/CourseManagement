@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class StudentGradeDAL extends ConnectDB {
 
-    public List readStudentGrade() {
+    public List readStudent() {
         List list = new ArrayList();
         try {
             String sql = "SELECT studentgrade*. , Lastname , Firstname , Title FROM `course`, `person`, `studentgrade` "
@@ -74,7 +74,7 @@ public class StudentGradeDAL extends ConnectDB {
         return list;
     }
 
-    public int insertStudentGrade(int CourseID, int studenID, float Grade) {
+    public int InsertStudentGradeDAL(int CourseID, int studenID, float Grade) {
         try {
             String sql = "INSERT INTO studentgrade(`CourseID`, `StudentID`, `Grade`) VALUES (?, ? ,?)";
             PreparedStatement pre = this.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -98,7 +98,7 @@ public class StudentGradeDAL extends ConnectDB {
         return 0;
     }
 
-    public boolean deleteStudentGrade(int EnrollmentID) {
+    public boolean deleteStudentgradeDAL(int EnrollmentID) {
         try {
             String sql = "DELETE FROM studentgrade WHERE `EnrollMentID` = '" + EnrollmentID + "'";
             PreparedStatement stament = this.getConnection().prepareStatement(sql);

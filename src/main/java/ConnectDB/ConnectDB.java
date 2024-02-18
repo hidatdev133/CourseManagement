@@ -1,6 +1,5 @@
 package ConnectDB;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -37,7 +36,7 @@ public class ConnectDB {
         return con;
     }
 
-    //run sql
+//run sql
     public static ResultSet doReadQuery(String sql) {
         ResultSet rs = null;
 
