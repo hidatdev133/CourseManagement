@@ -1,6 +1,5 @@
 package DAL.StudentGrade;
 
-
 import ConnectDB.ConnectDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,35 +11,33 @@ import javax.swing.JOptionPane;
 
 public class StudentGradeDAL extends ConnectDB {
 
-    public List readStudent() {
-        List list = new ArrayList();
+    public List<List<Object>> readStudent() {
+        List<List<Object>> studentGradeList = new ArrayList<>();
         try {
-            String sql = "SELECT studentgrade*. , Lastname , Firstname , Title FROM `course`, `person`, `studentgrade` "
-                    + "WHERE studentgrade.CourseID = course.CourseID AND StudentID = PersonID ORDER By EnrollmentID ASC";
+            String sql = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                    + "FROM studentgrade sg "
+                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                    + "ORDER BY sg.EnrollmentID ASC";
             ResultSet rs = this.doReadQuery(sql);
             if (rs != null) {
                 while (rs.next()) {
-                    List list2 = new ArrayList();
-                    StudentGrade stg = new StudentGrade();
+                    List<Object> studentGradeInfo = new ArrayList<>();
 
-                    stg.setEnrollmentID(rs.getInt("EnrollmentID"));
-                    stg.setCourseID(rs.getInt("CourseID"));
-                    stg.setStudentID(rs.getInt("StudentID"));
-                    stg.setGrade(rs.getFloat("Grade"));
+                    studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                    studentGradeInfo.add(rs.getInt("CourseID"));
+                    studentGradeInfo.add(rs.getInt("StudentID"));
+                    studentGradeInfo.add(rs.getFloat("Grade"));
+                    studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                    studentGradeInfo.add(rs.getString("Title"));
 
-                    String fullname = rs.getString("Lastname") + " " + rs.getString("Firstname");
-                    String title = rs.getString("Title");
-
-                    list2.add(stg);
-                    list2.add(fullname);
-                    list2.add(title);
-                    list.add(list2);
+                    studentGradeList.add(studentGradeInfo);
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error");
+            e.printStackTrace();
         }
-        return list;
+        return studentGradeList;
     }
 
     public List findStudentByGrade(float Grade) {
