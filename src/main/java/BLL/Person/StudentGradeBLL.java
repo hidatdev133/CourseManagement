@@ -20,10 +20,6 @@ public class StudentGradeBLL {
         return studentGradeDAL.readStudent();
     }
 
-    public List findStudentByGrade(float grade) {
-        return studentGradeDAL.findStudentByGrade(grade);
-    }
-
     public int insertStudentGrade(int courseID, int studentID, float grade) {
         return studentGradeDAL.InsertStudentGradeDAL(courseID, studentID, grade);
     }
@@ -36,11 +32,8 @@ public class StudentGradeBLL {
         return studentGradeDAL.editStudentGrade(enrollmentID, courseID, studentID, grade);
     }
 
-    public List getCourseIDFromStudentGrade(int courseID) throws SQLException {
-        return studentGradeDAL.getCourseIDFromStudentGrade(courseID);
+    public List<List<Object>> searchStudentGrade(String searchQuery) {
+        return studentGradeDAL.searchStudentGrade(searchQuery);
     }
 
-    public List getStudentIDFromStudentGrade(int studentID) throws SQLException {
-        return studentGradeDAL.getStudentIDFromStudentGrade(studentID);
-    }
 }
