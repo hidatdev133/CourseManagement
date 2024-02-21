@@ -41,6 +41,9 @@ public class ConnectDB {
         ResultSet rs = null;
 
         try {
+            if (st == null || con.isClosed()) {
+                connectDB(); // Ensure connection is established
+            }
             rs = st.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ConnectDB.class.getName())
