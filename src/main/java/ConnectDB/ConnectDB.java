@@ -33,6 +33,19 @@ public class ConnectDB {
     }
 
     public static Connection getConnection() {
+        host = "localhost";
+        port = "3306";
+        dbUser = "root";
+        dbName = "school";
+        dbPassword = "";
+        String dbPath = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
+        try {
+            con = DriverManager.getConnection(dbPath, dbUser, dbPassword);
+            System.out.println("Connected to the database successfully.");
+        } catch (SQLException ex) {
+            System.out.println("Failed to connect to the database.");
+            ex.printStackTrace();
+        }
         return con;
     }
 

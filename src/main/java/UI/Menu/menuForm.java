@@ -1,14 +1,14 @@
 package UI.Menu;
 
+import UI.Student.studentForm;
 import UI.StudentGrade.studenGradePanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 
 public class menuForm extends javax.swing.JFrame {
 
     studenGradePanel sgp = new studenGradePanel();
-
+    studentForm stdf = new studentForm();
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -444,18 +444,14 @@ public class menuForm extends javax.swing.JFrame {
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
-
-        studenGradePanel sgp = new studenGradePanel();
-
-        jPanel4.add(sgp);
-
+        jPanel4.add(stdf);
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
 
-        btnStudentGrade.setBackground(Color.blue);
+        btnStudent.setBackground(Color.blue);
         btnHomePage.setBackground(new Color(51, 204, 0));
         btnTeacher.setBackground(new Color(51, 204, 0));
-        btnStudent.setBackground(new Color(51, 204, 0));
+        btnStudentGrade.setBackground(new Color(51, 204, 0));
         btnCourseInstructor.setBackground(new Color(51, 204, 0));
         btnOnlineCourse.setBackground(new Color(51, 204, 0));
         btnOnsiteCourse.setBackground(new Color(51, 204, 0));
