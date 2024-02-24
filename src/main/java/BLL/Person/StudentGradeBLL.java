@@ -44,4 +44,12 @@ public class StudentGradeBLL {
     public List<List<Object>> searchStudentGradeByGrade(float grade) {
         return studentGradeDAL.searchStudentGradeByGrade(grade);
     }
+
+    public List<List<Object>> searchStudentGradeByStudentName(String name) {
+        return studentGradeDAL.searchStudentGradeByStudentName(name);
+    }
+    
+    public List<List<Object>> searchStudentGradeByCourseName(String name) {
+        return studentGradeDAL.searchStudentGradeByCourseName(name);
+    }
 }

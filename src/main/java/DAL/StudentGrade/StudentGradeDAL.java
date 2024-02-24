@@ -1,6 +1,8 @@
 package DAL.StudentGrade;
 
 import ConnectDB.ConnectDB;
+import DAL.Student.Student;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,23 +95,28 @@ public class StudentGradeDAL extends ConnectDB {
     public List<List<Object>> searchStudentGradeByCourseID(String courseID) {
         List<List<Object>> searchResult = new ArrayList<>();
         try {
-            String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
-                    + "FROM studentgrade sg "
-                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
-                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
-                    + "WHERE sg.CourseID = ?";
-            PreparedStatement statement = getConnection().prepareStatement(query);
-            statement.setString(1, courseID);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                List<Object> studentGradeInfo = new ArrayList<>();
-                studentGradeInfo.add(rs.getInt("EnrollmentID"));
-                studentGradeInfo.add(rs.getInt("CourseID"));
-                studentGradeInfo.add(rs.getInt("StudentID"));
-                studentGradeInfo.add(rs.getFloat("Grade"));
-                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
-                studentGradeInfo.add(rs.getString("Title"));
-                searchResult.add(studentGradeInfo);
+            // Kiểm tra xem chuỗi đầu vào có hợp lệ không
+            if (courseID.matches("\\d+")) { // Kiểm tra xem chuỗi chỉ chứa các ký tự số hay không
+                String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                        + "FROM studentgrade sg "
+                        + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                        + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                        + "WHERE sg.CourseID LIKE ?";
+                PreparedStatement statement = getConnection().prepareStatement(query);
+                statement.setString(1, "%" + courseID + "%"); // Sử dụng LIKE để tìm kiếm các CourseID chứa chuỗi đầu vào
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()) {
+                    List<Object> studentGradeInfo = new ArrayList<>();
+                    studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                    studentGradeInfo.add(rs.getInt("CourseID"));
+                    studentGradeInfo.add(rs.getInt("StudentID"));
+                    studentGradeInfo.add(rs.getFloat("Grade"));
+                    studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                    studentGradeInfo.add(rs.getString("Title"));
+                    searchResult.add(studentGradeInfo);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid input: Please enter a valid Course ID");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -117,26 +124,32 @@ public class StudentGradeDAL extends ConnectDB {
         return searchResult;
     }
 
-    public List<List<Object>> searchStudentGradeByStudentID(String courseID) {
+    public List<List<Object>> searchStudentGradeByStudentID(String studentID) {
         List<List<Object>> searchResult = new ArrayList<>();
         try {
-            String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
-                    + "FROM studentgrade sg "
-                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
-                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
-                    + "WHERE sg.StudentID = ?";
-            PreparedStatement statement = getConnection().prepareStatement(query);
-            statement.setString(1, courseID);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                List<Object> studentGradeInfo = new ArrayList<>();
-                studentGradeInfo.add(rs.getInt("EnrollmentID"));
-                studentGradeInfo.add(rs.getInt("CourseID"));
-                studentGradeInfo.add(rs.getInt("StudentID"));
-                studentGradeInfo.add(rs.getFloat("Grade"));
-                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
-                studentGradeInfo.add(rs.getString("Title"));
-                searchResult.add(studentGradeInfo);
+            // Kiểm tra xem chuỗi đầu vào có hợp lệ không
+            if (studentID.matches("\\d+")) { // Kiểm tra xem chuỗi chỉ chứa các ký tự số hay không
+                String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                        + "FROM studentgrade sg "
+                        + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                        + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                        + "WHERE sg.StudentID LIKE ?";
+                PreparedStatement statement = getConnection().prepareStatement(query);
+                statement.setString(1, "%" + studentID + "%"); // Sử dụng LIKE để tìm kiếm các CourseID chứa chuỗi đầu vào
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()) {
+                    List<Object> studentGradeInfo = new ArrayList<>();
+                    studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                    studentGradeInfo.add(rs.getInt("CourseID"));
+                    studentGradeInfo.add(rs.getInt("StudentID"));
+                    studentGradeInfo.add(rs.getFloat("Grade"));
+                    studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                    studentGradeInfo.add(rs.getString("Title"));
+                    searchResult.add(studentGradeInfo);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid input: Please enter a valid Course ID");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -151,22 +164,22 @@ public class StudentGradeDAL extends ConnectDB {
                     + "FROM studentgrade sg "
                     + "INNER JOIN course c ON sg.CourseID = c.CourseID "
                     + "INNER JOIN person p ON sg.StudentID = p.PersonID "
-                    + "WHERE sg.Grade = ?";
+                    + "WHERE sg.Grade >= ? AND sg.Grade < ?";  // Sử dụng phép so sánh với một khoảng giá trị của grade
+
             PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setFloat(1, grade);
+            statement.setFloat(2, grade + 1); // Tìm kiếm các bản ghi có giá trị grade từ grade đến dưới (grade + 1)
 
             ResultSet rs = statement.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    List<Object> studentGradeInfo = new ArrayList<>();
-                    studentGradeInfo.add(rs.getInt("EnrollmentID"));
-                    studentGradeInfo.add(rs.getInt("CourseID"));
-                    studentGradeInfo.add(rs.getInt("StudentID"));
-                    studentGradeInfo.add(rs.getFloat("Grade"));
-                    studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
-                    studentGradeInfo.add(rs.getString("Title"));
-                    searchResult.add(studentGradeInfo);
-                }
+            while (rs.next()) {
+                List<Object> studentGradeInfo = new ArrayList<>();
+                studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                studentGradeInfo.add(rs.getInt("CourseID"));
+                studentGradeInfo.add(rs.getInt("StudentID"));
+                studentGradeInfo.add(rs.getFloat("Grade"));
+                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                studentGradeInfo.add(rs.getString("Title"));
+                searchResult.add(studentGradeInfo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,4 +187,85 @@ public class StudentGradeDAL extends ConnectDB {
         return searchResult;
     }
 
+    public static List<Student> searchStudentByStudentName(String name) {
+        String sql = "SELECT * FROM person WHERE Lastname LIKE ? OR Firstname LIKE ?";
+        List<Student> students = new ArrayList<>();
+
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%" + name + "%");
+            pstmt.setString(2, "%" + name + "%");
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int personId = rs.getInt("PersonID");
+                    String lastName = rs.getString("LastName");
+                    String firstName = rs.getString("FirstName");
+                    java.sql.Date enrollmentDate = rs.getDate("EnrollmentDate");
+
+                    Student student = new Student(personId, lastName, firstName, enrollmentDate);
+                    students.add(student);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return students;
+    }
+
+    public static List<List<Object>> searchStudentGradeByStudentName(String name) {
+        List<List<Object>> searchResult = new ArrayList<>();
+        try {
+            // Sử dụng LIKE để tìm kiếm theo tên sinh viên
+            String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                    + "FROM studentgrade sg "
+                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                    + "WHERE CONCAT(p.Lastname, ' ', p.Firstname) LIKE ?";
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            statement.setString(1, "%" + name + "%");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                List<Object> studentGradeInfo = new ArrayList<>();
+                studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                studentGradeInfo.add(rs.getInt("CourseID"));
+                studentGradeInfo.add(rs.getInt("StudentID"));
+                studentGradeInfo.add(rs.getFloat("Grade"));
+                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                studentGradeInfo.add(rs.getString("Title"));
+                searchResult.add(studentGradeInfo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResult;
+    }
+
+    public static List<List<Object>> searchStudentGradeByCourseName(String name) {
+        List<List<Object>> searchResult = new ArrayList<>();
+        try {
+            // Sử dụng LIKE để tìm kiếm theo tên của khóa học
+            String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                    + "FROM studentgrade sg "
+                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                    + "WHERE c.Title LIKE ?";
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            statement.setString(1, "%" + name + "%");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                List<Object> studentGradeInfo = new ArrayList<>();
+                studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                studentGradeInfo.add(rs.getInt("CourseID"));
+                studentGradeInfo.add(rs.getInt("StudentID"));
+                studentGradeInfo.add(rs.getFloat("Grade"));
+                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                studentGradeInfo.add(rs.getString("Title"));
+                searchResult.add(studentGradeInfo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResult;
+    }
 }

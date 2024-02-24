@@ -171,7 +171,7 @@ public class studenGradePanel extends javax.swing.JPanel {
 
         cbStudentID.setPreferredSize(new java.awt.Dimension(64, 22));
 
-        searchcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CourseID", "StudentID", "Grade" }));
+        searchcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CourseID", "StudentID", "Grade", "Student Name", "Course Name" }));
 
         btnSearch.setBackground(new java.awt.Color(0, 161, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/search (2).png"))); // NOI18N
@@ -394,6 +394,12 @@ public class studenGradePanel extends javax.swing.JPanel {
                             JOptionPane.showMessageDialog(this, "Invalid grade format");
                         }
                         break;
+                case "Student Name":
+                    searchResult = studentGradeBLL.searchStudentGradeByStudentName(searchQuery);
+                    break;        
+                case "Course Name":
+                    searchResult = studentGradeBLL.searchStudentGradeByCourseName(searchQuery);
+                    break;       
                 default:
                     JOptionPane.showMessageDialog(this, "Invalid search option");
                     break;
