@@ -7,6 +7,7 @@ import DAL.StudentGrade.StudentGradeDAL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class StudentGradeBLL {
 
@@ -32,8 +33,15 @@ public class StudentGradeBLL {
         return studentGradeDAL.editStudentGrade(enrollmentID, courseID, studentID, grade);
     }
 
-    public List<List<Object>> searchStudentGrade(String searchQuery) {
-        return studentGradeDAL.searchStudentGrade(searchQuery);
+    public List<List<Object>> searchStudentGradeByCourseID(String searchQuery) {
+        return studentGradeDAL.searchStudentGradeByCourseID(searchQuery);
     }
 
+    public List<List<Object>> searchStudentGradeByStudentID(String searchQuery) {
+        return studentGradeDAL.searchStudentGradeByStudentID(searchQuery);
+    }
+
+    public List<List<Object>> searchStudentGradeByGrade(float grade) {
+        return studentGradeDAL.searchStudentGradeByGrade(grade);
+    }
 }

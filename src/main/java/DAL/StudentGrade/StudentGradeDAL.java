@@ -90,18 +90,70 @@ public class StudentGradeDAL extends ConnectDB {
         return false;
     }
 
-    public List<List<Object>> searchStudentGrade(String searchQuery) {
-        List<List<Object>> studentGradeList = new ArrayList<>();
+    public List<List<Object>> searchStudentGradeByCourseID(String courseID) {
+        List<List<Object>> searchResult = new ArrayList<>();
+        try {
+            String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                    + "FROM studentgrade sg "
+                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                    + "WHERE sg.CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            statement.setString(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                List<Object> studentGradeInfo = new ArrayList<>();
+                studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                studentGradeInfo.add(rs.getInt("CourseID"));
+                studentGradeInfo.add(rs.getInt("StudentID"));
+                studentGradeInfo.add(rs.getFloat("Grade"));
+                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                studentGradeInfo.add(rs.getString("Title"));
+                searchResult.add(studentGradeInfo);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        return searchResult;
+    }
+
+    public List<List<Object>> searchStudentGradeByStudentID(String courseID) {
+        List<List<Object>> searchResult = new ArrayList<>();
+        try {
+            String query = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
+                    + "FROM studentgrade sg "
+                    + "INNER JOIN course c ON sg.CourseID = c.CourseID "
+                    + "INNER JOIN person p ON sg.StudentID = p.PersonID "
+                    + "WHERE sg.StudentID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            statement.setString(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                List<Object> studentGradeInfo = new ArrayList<>();
+                studentGradeInfo.add(rs.getInt("EnrollmentID"));
+                studentGradeInfo.add(rs.getInt("CourseID"));
+                studentGradeInfo.add(rs.getInt("StudentID"));
+                studentGradeInfo.add(rs.getFloat("Grade"));
+                studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
+                studentGradeInfo.add(rs.getString("Title"));
+                searchResult.add(studentGradeInfo);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        return searchResult;
+    }
+
+    public List<List<Object>> searchStudentGradeByGrade(float grade) {
+        List<List<Object>> searchResult = new ArrayList<>();
         try {
             String sql = "SELECT sg.EnrollmentID, sg.CourseID, sg.StudentID, sg.Grade, p.Lastname, p.Firstname, c.Title "
                     + "FROM studentgrade sg "
                     + "INNER JOIN course c ON sg.CourseID = c.CourseID "
                     + "INNER JOIN person p ON sg.StudentID = p.PersonID "
-                    + "WHERE sg.Grade = ? OR sg.StudentID = ? OR sg.CourseID = ?";
+                    + "WHERE sg.Grade = ?";
             PreparedStatement statement = getConnection().prepareStatement(sql);
-            statement.setFloat(1, Float.parseFloat(searchQuery)); // Đối với Grade
-            statement.setInt(2, Integer.parseInt(searchQuery)); // Đối với StudentID
-            statement.setInt(3, Integer.parseInt(searchQuery)); // Đối với CourseID
+            statement.setFloat(1, grade);
 
             ResultSet rs = statement.executeQuery();
             if (rs != null) {
@@ -113,12 +165,13 @@ public class StudentGradeDAL extends ConnectDB {
                     studentGradeInfo.add(rs.getFloat("Grade"));
                     studentGradeInfo.add(rs.getString("Lastname") + " " + rs.getString("Firstname"));
                     studentGradeInfo.add(rs.getString("Title"));
-                    studentGradeList.add(studentGradeInfo);
+                    searchResult.add(studentGradeInfo);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return studentGradeList;
+        return searchResult;
     }
+
 }
