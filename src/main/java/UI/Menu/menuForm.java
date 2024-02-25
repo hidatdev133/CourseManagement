@@ -2,6 +2,7 @@ package UI.Menu;
 
 import UI.Student.studentForm;
 import UI.StudentGrade.studenGradePanel;
+import UI.Teacher.teacherPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -9,6 +10,7 @@ public class menuForm extends javax.swing.JFrame {
 
     studenGradePanel sgp = new studenGradePanel();
     studentForm stdf = new studentForm();
+    teacherPanel teacherPanel = new teacherPanel();
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -355,7 +357,7 @@ public class menuForm extends javax.swing.JFrame {
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
 
-        jPanel4.add(sgp);
+        jPanel4.add(teacherPanel);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
