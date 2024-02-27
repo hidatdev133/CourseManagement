@@ -70,7 +70,7 @@ public class studentForm extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 255));
@@ -156,11 +156,11 @@ public class studentForm extends javax.swing.JPanel {
 
         jLabel5.setText("EnrollmentDate");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -196,7 +196,7 @@ public class studentForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -242,7 +242,7 @@ public class studentForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1)))
+                            .addComponent(btnReset)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -256,7 +256,7 @@ public class studentForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPersonIDActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
     txtLastname.setText("");
     txtFirstname.setText("");
     fillTable();
@@ -276,7 +276,7 @@ public class studentForm extends javax.swing.JPanel {
     
     // Gán giá trị mới cho JTextField txtPersonID
     txtPersonID.setText(String.valueOf(maxPersonID));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnResetActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -430,8 +430,8 @@ public class studentForm extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
