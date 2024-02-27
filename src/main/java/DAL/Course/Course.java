@@ -2,5 +2,57 @@ package DAL.Course;
 
 
 public class Course {
+    int CourseID,Credits, DepartmentID;
+    String title;
+
+    public Course() {
+    }
+
+    public Course(int CourseID, int Credits, int DepartmentID, String title) {
+        this.CourseID = CourseID;
+        this.Credits = Credits;
+        this.DepartmentID = DepartmentID;
+        this.title = title;
+    }
+
+    public int getCourseID() {
+        return CourseID;
+    }
+
+    public void setCourseID(int CourseID) {
+        this.CourseID = CourseID;
+    }
+
+    public int getCredits() {
+        return Credits;
+    }
+
+    public void setCredits(int Credits) {
+        this.Credits = Credits;
+    }
+
+    public int getDepartmentID() {
+        return DepartmentID;
+    }
+
+    public void setDepartmentID(int DepartmentID) {
+        this.DepartmentID = DepartmentID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return CourseID+"" ;
+    }
+    
+
+   
     
 }
