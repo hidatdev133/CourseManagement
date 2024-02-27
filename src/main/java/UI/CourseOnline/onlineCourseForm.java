@@ -57,7 +57,7 @@ public class onlineCourseForm extends javax.swing.JPanel {
         int stt = 0;
         for (OnlineCourse item : listCourse) {
             int id = item.getCourseID();
-            String url = item.getUrl();
+            String url = item.getURL();
             stt ++;
             String title = item.getTitle();
             Object[] data = {stt,id, title, url};

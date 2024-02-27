@@ -12,6 +12,10 @@ public class Course {
         this.title = title;
     }
 
+    public Course() {
+    }
+
+    
     public int getCourseID() {
         return CourseID;
     }
