@@ -1,5 +1,6 @@
 package UI.Menu;
 
+import UI.CourseOnline.onlineCourseForm;
 import UI.Student.studentForm;
 import UI.StudentGrade.studenGradePanel;
 import java.awt.BorderLayout;
@@ -9,6 +10,7 @@ public class menuForm extends javax.swing.JFrame {
 
     studenGradePanel sgp = new studenGradePanel();
     studentForm stdf = new studentForm();
+    onlineCourseForm online = new onlineCourseForm();
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -408,8 +410,8 @@ public class menuForm extends javax.swing.JFrame {
     private void btnOnlineCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnlineCourseActionPerformed
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
-
-        jPanel4.add(sgp);
+        
+        jPanel4.add(online);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
