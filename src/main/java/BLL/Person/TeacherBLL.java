@@ -2,14 +2,16 @@ package BLL.Person;
 
 import DAL.Teacher.Teacher;
 import DAL.Teacher.TeacherDAL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherBLL {
-    private TeacherDAL teacherDAL;
+    public TeacherDAL teacherDAL;
 
     public TeacherBLL() {
-        this.teacherDAL = new TeacherDAL();
+        teacherDAL = new TeacherDAL();
     }
+    
     
     public List<Teacher> readTeacher() {
         return teacherDAL.readTeacher();
@@ -29,5 +31,10 @@ public class TeacherBLL {
     
     public List<Teacher> searchTeacherBLL(String query) {
         return teacherDAL.searchTeacherDAL(query);
+    }
+
+    public List<Teacher> LoadTeachers() {
+        ArrayList list = (ArrayList) teacherDAL.readTeacher();
+        return list; 
     }
 }
