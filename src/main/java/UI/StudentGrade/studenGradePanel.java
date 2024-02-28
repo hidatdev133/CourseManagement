@@ -6,10 +6,14 @@ import DAL.StudentGrade.StudentGrade;
 import BLL.Person.StudentGradeBLL;
 import UI.Menu.menuForm;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 public class studenGradePanel extends javax.swing.JPanel {
@@ -22,10 +26,9 @@ public class studenGradePanel extends javax.swing.JPanel {
         initComponents();
         dtm = (DefaultTableModel) jtStudentGrade.getModel();
         studentGradeBLL = new StudentGradeBLL();
+        // Lắng nghe sự kiện khi combobox hoặc txtSearch thay đổi
+
         displayStudentGrades();
-        txtEnrollmentID.setEditable(false);
-        txtStudentName.setEditable(false);
-        txtCourseName.setEditable(false);
 
         // Lấy dữ liệu cho combobox CourseID
         List<String> courseIDs = readCourseIDs();
@@ -54,6 +57,10 @@ public class studenGradePanel extends javax.swing.JPanel {
     private void displayStudentGrades() {
         dtm.setRowCount(0); // Xóa dữ liệu trước đó
 
+        cbCourseID.setSelectedItem(null);
+        cbStudentID.setSelectedItem(null);
+        txtGrade.setText("");
+
         // Gọi phương thức đọc sinh viên từ BLL
         List<List<Object>> studentGradeList = studentGradeBLL.readStudent();
 
@@ -67,11 +74,9 @@ public class studenGradePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtEnrollmentID = new javax.swing.JTextField();
         txtGrade = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtStudentGrade = new javax.swing.JTable();
@@ -79,20 +84,15 @@ public class studenGradePanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtStudentName = new javax.swing.JTextField();
-        txtCourseName = new javax.swing.JTextField();
         cbCourseID = new javax.swing.JComboBox<>();
         cbStudentID = new javax.swing.JComboBox<>();
+        searchcb = new javax.swing.JComboBox<>();
+        btnSearch = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(950, 513));
-
-        jLabel1.setText("EnrollmentID :");
 
         jLabel2.setText("CourseID :");
 
@@ -121,10 +121,18 @@ public class studenGradePanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jtStudentGrade);
+        if (jtStudentGrade.getColumnModel().getColumnCount() > 0) {
+            jtStudentGrade.getColumnModel().getColumn(0).setHeaderValue("EnrollmentID");
+            jtStudentGrade.getColumnModel().getColumn(1).setHeaderValue("CourseID");
+            jtStudentGrade.getColumnModel().getColumn(2).setHeaderValue("StudentID");
+            jtStudentGrade.getColumnModel().getColumn(3).setHeaderValue("Grade");
+            jtStudentGrade.getColumnModel().getColumn(4).setHeaderValue("Student Name");
+            jtStudentGrade.getColumnModel().getColumn(5).setHeaderValue("Course Name");
+        }
 
         btnReset.setBackground(new java.awt.Color(0, 161, 255));
         btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
-        btnReset.setText("RESET");
+        btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
@@ -133,7 +141,7 @@ public class studenGradePanel extends javax.swing.JPanel {
 
         btnAdd.setBackground(new java.awt.Color(0, 161, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/add.png"))); // NOI18N
-        btnAdd.setText("ADD");
+        btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -142,7 +150,7 @@ public class studenGradePanel extends javax.swing.JPanel {
 
         btnEdit.setBackground(new java.awt.Color(0, 161, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/edit-st.png"))); // NOI18N
-        btnEdit.setText("EDIT");
+        btnEdit.setText("Save");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -151,29 +159,16 @@ public class studenGradePanel extends javax.swing.JPanel {
 
         btnDelete.setBackground(new java.awt.Color(0, 161, 255));
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/delete (3).png"))); // NOI18N
-        btnDelete.setText("DELETE");
+        btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
 
-        btnSearch.setBackground(new java.awt.Color(0, 161, 255));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/search (2).png"))); // NOI18N
-        btnSearch.setText("SEARCH");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 161, 255));
         jLabel5.setText("STUDENT GRADE");
-
-        jLabel6.setText("Student Name:");
-
-        jLabel7.setText("Course Name");
 
         cbCourseID.setPreferredSize(new java.awt.Dimension(64, 22));
         cbCourseID.addActionListener(new java.awt.event.ActionListener() {
@@ -184,60 +179,57 @@ public class studenGradePanel extends javax.swing.JPanel {
 
         cbStudentID.setPreferredSize(new java.awt.Dimension(64, 22));
 
+        searchcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CourseID", "StudentID", "Grade", "Student Name", "Course Name" }));
+
+        btnSearch.setBackground(new java.awt.Color(0, 161, 255));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/search (2).png"))); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtGrade, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(cbCourseID, 0, 130, Short.MAX_VALUE)
+                            .addComponent(cbStudentID, 0, 130, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(10, 10, 10))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnReset)
-                                            .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
+                                .addGap(119, 119, 119)
+                                .addComponent(jLabel5))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtEnrollmentID, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(txtGrade, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(cbCourseID, 0, 130, Short.MAX_VALUE)
-                                    .addComponent(cbStudentID, 0, 130, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(btnAdd)
-                                        .addGap(82, 82, 82)
-                                        .addComponent(btnEdit)
-                                        .addGap(73, 73, 73)
-                                        .addComponent(btnDelete)
-                                        .addGap(74, 74, 74)
-                                        .addComponent(btnSearch)))
-                                .addGap(0, 114, Short.MAX_VALUE)))))
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchcb, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -245,42 +237,33 @@ public class studenGradePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDelete)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchcb, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtEnrollmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(cbCourseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
+                            .addComponent(cbCourseID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(cbStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(37, 37, 37)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
+                            .addComponent(btnAdd)
+                            .addComponent(btnEdit))
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnReset))
+                            .addComponent(btnDelete)
+                            .addComponent(btnReset)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
@@ -289,24 +272,21 @@ public class studenGradePanel extends javax.swing.JPanel {
     private void jtStudentGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtStudentGradeMouseClicked
         int i = jtStudentGrade.getSelectedRow();
         if (i >= 0) {
-            txtEnrollmentID.setText(dtm.getValueAt(i, 0).toString());
+
             cbCourseID.setSelectedItem(dtm.getValueAt(i, 1).toString());
 
             cbStudentID.setSelectedItem(dtm.getValueAt(i, 2).toString());
             txtGrade.setText(dtm.getValueAt(i, 3).toString());
-            txtStudentName.setText(dtm.getValueAt(i, 4).toString());
-            txtCourseName.setText(dtm.getValueAt(i, 5).toString());
 
         }
     }//GEN-LAST:event_jtStudentGradeMouseClicked
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        txtEnrollmentID.setText("");
+
         cbCourseID.setSelectedItem(null); // Đặt giá trị mặc định của combobox
         cbStudentID.setSelectedItem(null); // Đặt giá trị mặc định của combobox
         txtGrade.setText("");
-        txtStudentName.setText("");
-        txtCourseName.setText("");
+
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -336,12 +316,10 @@ public class studenGradePanel extends javax.swing.JPanel {
             displayStudentGrades();
 
             // Xóa các trường dữ liệu đã nhập sau khi thêm thành công
-            txtEnrollmentID.setText("");
             cbCourseID.setSelectedIndex(0);
             cbStudentID.setSelectedIndex(0);
             txtGrade.setText("");
-            txtStudentName.setText("");
-            txtCourseName.setText("");
+
         } else {
             JOptionPane.showMessageDialog(this, "Failed to add data");
         }
@@ -352,19 +330,37 @@ public class studenGradePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbCourseIDActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        int enrollmentID = Integer.parseInt(txtEnrollmentID.getText());
-        int courseID = Integer.parseInt(cbCourseID.getSelectedItem().toString());
-        int studentID = Integer.parseInt(cbStudentID.getSelectedItem().toString());
-        float grade = Float.parseFloat(txtGrade.getText());
+        // Lấy dữ liệu được chọn từ bảng
+        int selectedRow = jtStudentGrade.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Lấy dữ liệu ban đầu
+            int enrollmentID = Integer.parseInt(dtm.getValueAt(selectedRow, 0).toString());
+            int courseID = Integer.parseInt(dtm.getValueAt(selectedRow, 1).toString());
+            int studentID = Integer.parseInt(dtm.getValueAt(selectedRow, 2).toString());
+            float grade = Float.parseFloat(dtm.getValueAt(selectedRow, 3).toString());
 
-        // Gọi phương thức để sửa dữ liệu trong BLL
-        boolean edited = studentGradeBLL.editStudentGrade(enrollmentID, courseID, studentID, grade);
-        if (edited) {
-            // Nếu sửa thành công, cập nhật lại bảng jtStudentGrade
-            displayStudentGrades();
-            JOptionPane.showMessageDialog(this, "Data updated successfully!");
+            // Lấy dữ liệu mới từ giao diện
+            int newCourseID = Integer.parseInt(cbCourseID.getSelectedItem().toString());
+            int newStudentID = Integer.parseInt(cbStudentID.getSelectedItem().toString());
+            float newGrade = Float.parseFloat(txtGrade.getText().toString());
+
+            // Kiểm tra xem có sự thay đổi không
+            if (courseID != newCourseID || studentID != newStudentID || grade != newGrade) {
+                // Nếu có sự thay đổi, thực hiện cập nhật dữ liệu
+                boolean success = studentGradeBLL.editStudentGrade(enrollmentID, newCourseID, newStudentID, newGrade);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Data updated successfully");
+                    // Sau khi cập nhật thành công, làm mới bảng
+                    displayStudentGrades();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to update data");
+                }
+            } else {
+                // Nếu không có sự thay đổi, hiển thị thông báo "No changes made"
+                JOptionPane.showMessageDialog(this, "No changes made");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Failed to update data!");
+            JOptionPane.showMessageDialog(this, "Please select a row to edit");
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -386,13 +382,44 @@ public class studenGradePanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String searchQuery = txtSearch.getText().trim();
+        String selectedOption = searchcb.getSelectedItem().toString();
+
         if (!searchQuery.isEmpty()) {
-            List<List<Object>> searchResult = studentGradeBLL.searchStudentGrade(searchQuery);
-            // Xóa dữ liệu cũ trong bảng
-            dtm.setRowCount(0);
-            // Hiển thị kết quả tìm kiếm trên bảng
-            for (List<Object> studentGradeInfo : searchResult) {
-                dtm.addRow(studentGradeInfo.toArray());
+            List<List<Object>> searchResult = null;
+
+            switch (selectedOption) {
+                case "CourseID":
+                    searchResult = studentGradeBLL.searchStudentGradeByCourseID(searchQuery);
+                    break;
+                case "StudentID":
+                    searchResult = studentGradeBLL.searchStudentGradeByStudentID(searchQuery);
+                    break;
+                case "Grade":
+                    try {
+                        float grade = Float.parseFloat(searchQuery);
+                        searchResult = studentGradeBLL.searchStudentGradeByGrade(grade);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Invalid grade format");
+                        }
+                        break;
+                case "Student Name":
+                    searchResult = studentGradeBLL.searchStudentGradeByStudentName(searchQuery);
+                    break;        
+                case "Course Name":
+                    searchResult = studentGradeBLL.searchStudentGradeByCourseName(searchQuery);
+                    break;       
+                default:
+                    JOptionPane.showMessageDialog(this, "Invalid search option");
+                    break;
+            }
+
+            if (searchResult != null) {
+                // Xóa dữ liệu cũ trong bảng
+                dtm.setRowCount(0);
+                // Hiển thị kết quả tìm kiếm trên bảng
+                for (List<Object> studentGradeInfo : searchResult) {
+                    dtm.addRow(studentGradeInfo.toArray());
+                }
             }
         } else {
             // Nếu trường tìm kiếm trống, hiển thị tất cả sinh viên
@@ -416,19 +443,14 @@ public class studenGradePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbCourseID;
     private javax.swing.JComboBox<String> cbStudentID;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtStudentGrade;
-    private javax.swing.JTextField txtCourseName;
-    private javax.swing.JTextField txtEnrollmentID;
+    private javax.swing.JComboBox<String> searchcb;
     private javax.swing.JTextField txtGrade;
     private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtStudentName;
     // End of variables declaration//GEN-END:variables
 }
