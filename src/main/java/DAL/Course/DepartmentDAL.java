@@ -1,8 +1,7 @@
 package DAL.Course;
-import ConnectDB.ConnectDB;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import ConnectDB.ConnectDB;
 public class DepartmentDAL extends  ConnectDB{
     
      public ArrayList readDepartment(){

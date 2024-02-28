@@ -18,6 +18,7 @@ public class DepartmentBLL {
         }
         return -1;
     }
+
     
     public ArrayList<Department> searchDepartmentsByName(String name){
         ArrayList<Department> searchList = new ArrayList<>();
@@ -33,4 +34,5 @@ public class DepartmentBLL {
     public Department findDepartmentIDByAllInfor(Department dpm){
         return department.findDepartmentIDByAllInfor(dpm);
     }
+
 }

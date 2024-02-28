@@ -4,18 +4,15 @@ package DAL.Course;
 public class Course {
     private int CourseID,Credit,DepartmentID;
     private String title;
-
+  
     public Course(int CourseID, int Credit, int DepartmentID, String title) {
         this.CourseID = CourseID;
         this.Credit = Credit;
         this.DepartmentID = DepartmentID;
         this.title = title;
     }
-
     public Course() {
     }
-
-    
     public int getCourseID() {
         return CourseID;
     }
@@ -47,5 +44,11 @@ public class Course {
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
+
+    @Override
+    public String toString() {
+        return CourseID+"" ;
+    }
+        
 }
