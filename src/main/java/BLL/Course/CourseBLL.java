@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class CourseBLL {
     private final CourseDAL courseDAL=new CourseDAL();
-
     public ArrayList<String> readDSID() {
         CourseDAL std = new CourseDAL();
         ArrayList<String> list = std.readDSID();

@@ -5,7 +5,7 @@ import DAL.Course.DepartmentDAL;
 import java.util.ArrayList;
 
 public class DepartmentBLL {
-    private final DepartmentDAL department=new DepartmentDAL();
+      private final DepartmentDAL department=new DepartmentDAL();
     public ArrayList readListDepartment(){
         return department.readDepartment();
     }
@@ -18,4 +18,21 @@ public class DepartmentBLL {
         }
         return -1;
     }
+
+    
+    public ArrayList<Department> searchDepartmentsByName(String name){
+        ArrayList<Department> searchList = new ArrayList<>();
+        ArrayList<Department> listOfDepartments = department.readDepartment();
+        for(Department item : listOfDepartments){
+            if(name.equals(item.getName())){
+                searchList.add(item);
+            }
+        }
+        return searchList;
+    }
+    
+    public Department findDepartmentIDByAllInfor(Department dpm){
+        return department.findDepartmentIDByAllInfor(dpm);
+    }
+
 }

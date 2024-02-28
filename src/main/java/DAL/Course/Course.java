@@ -2,19 +2,17 @@ package DAL.Course;
 
 
 public class Course {
-    int CourseID,Credit, DepartmentID;
-    String title;
-
-    public Course() {
-    }
-
+    private int CourseID,Credit,DepartmentID;
+    private String title;
+  
     public Course(int CourseID, int Credit, int DepartmentID, String title) {
         this.CourseID = CourseID;
         this.Credit = Credit;
         this.DepartmentID = DepartmentID;
         this.title = title;
     }
-
+    public Course() {
+    }
     public int getCourseID() {
         return CourseID;
     }
@@ -47,12 +45,10 @@ public class Course {
         this.title = title;
     }
 
+
     @Override
     public String toString() {
         return CourseID+"" ;
     }
-    
-
-   
-    
+        
 }

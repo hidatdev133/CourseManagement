@@ -2,12 +2,13 @@ package DAL.Course;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import ConnectDB.ConnectDB;
-public class DepartmentDAL extends ConnectDB{
-    public ArrayList readDepartment(){
+public class DepartmentDAL extends  ConnectDB{
+    
+     public ArrayList readDepartment(){
         ArrayList<Department>departmentList=new ArrayList();
         try{
             String sql="select * from department";
-            ResultSet rs=this.doReadQuery(sql);
+            ResultSet rs = this.doReadQuery(sql); 
             while(rs.next()){
                 Department department =new Department();
                department.setDepartmentID(rs.getInt(1));
@@ -22,6 +23,20 @@ public class DepartmentDAL extends ConnectDB{
             e.printStackTrace();
         }
         return departmentList;
+        
+    }
+     
+     public Department findDepartmentIDByAllInfor(Department de){
+        try{
+            String sql="SELECT * FROM Department WHERE Name = '" + de.Name + "' AND Budget = " + de.Budget + " AND StartDate = '" + de.StartDate + "'";
+            ResultSet rs = this.doReadQuery(sql); 
+            while(rs.next()){
+                de.setDepartmentID(rs.getInt("DepartmentID"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return de;
         
     }
 }
