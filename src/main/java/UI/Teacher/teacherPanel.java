@@ -24,10 +24,10 @@ public class teacherPanel extends javax.swing.JPanel {
 
     private TeacherBLL teacherBLL;
     private DefaultTableModel model;
-    
+
     public teacherPanel() {
         initComponents();
-        
+
         model = (DefaultTableModel) tbTeacher.getModel();
         teacherBLL = new TeacherBLL();
         fillTableTeacher();
@@ -62,7 +62,7 @@ public class teacherPanel extends javax.swing.JPanel {
 
         btnAdd.setBackground(new java.awt.Color(0, 161, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/add.png"))); // NOI18N
-        btnAdd.setText("ADD");
+        btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -71,7 +71,7 @@ public class teacherPanel extends javax.swing.JPanel {
 
         btnEdit.setBackground(new java.awt.Color(0, 161, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/edit-st.png"))); // NOI18N
-        btnEdit.setText("EDIT");
+        btnEdit.setText("Save");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -80,7 +80,7 @@ public class teacherPanel extends javax.swing.JPanel {
 
         btnDelete.setBackground(new java.awt.Color(0, 161, 255));
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/delete (3).png"))); // NOI18N
-        btnDelete.setText("DELETE");
+        btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -96,7 +96,9 @@ public class teacherPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        txtSearch.setText("input name....");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 161, 255));
         jLabel5.setText("TEACHER");
 
@@ -137,7 +139,7 @@ public class teacherPanel extends javax.swing.JPanel {
 
         btnReset.setBackground(new java.awt.Color(0, 161, 255));
         btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
-        btnReset.setText("RESET");
+        btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
@@ -150,62 +152,59 @@ public class teacherPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTeacherID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtTeacherID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtHireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtHireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(22, 22, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSearch))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addGap(92, 92, 92)
-                        .addComponent(btnEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete)
-                        .addGap(83, 83, 83)
-                        .addComponent(btnReset)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(366, 366, 366)
                     .addComponent(jLabel5)
-                    .addContainerGap(417, Short.MAX_VALUE)))
+                    .addContainerGap(384, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 21, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdd)
-                        .addComponent(btnEdit)
-                        .addComponent(btnReset)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTeacherID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
@@ -221,21 +220,25 @@ public class teacherPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtHireDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdd)
+                            .addComponent(btnEdit))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReset))))
+                .addGap(25, 25, 25))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel5)
-                    .addContainerGap(522, Short.MAX_VALUE)))
+                    .addContainerGap(512, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void fillTableTeacher() {
-        model.setRowCount(0); 
+        model.setRowCount(0);
 
         List<Teacher> teacherList = teacherBLL.readTeacher();
 
@@ -243,10 +246,10 @@ public class teacherPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{teacher.getTeacherID(), teacher.getLastName(), teacher.getFirstName(), teacher.getHireDate()});
         }
     }
-    
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         Date parsed = null;
-        
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String lastName = txtLastName.getText();
         String firstName = txtFirstName.getText();
@@ -259,7 +262,6 @@ public class teacherPanel extends javax.swing.JPanel {
             return;
         }
         java.sql.Date hireDate = new java.sql.Date(parsed.getTime());
-
 
         if (firstName.isEmpty() || lastName.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ dữ liệu");
@@ -284,11 +286,11 @@ public class teacherPanel extends javax.swing.JPanel {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         Date parsed = null;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         int teacherID = Integer.parseInt(txtTeacherID.getText());
         String lastName = txtLastName.getText();
         String firstName = txtFirstName.getText();
-        
+
         try {
             parsed = format.parse(txtHireDate.getText());
 
@@ -298,9 +300,9 @@ public class teacherPanel extends javax.swing.JPanel {
         java.sql.Date hireDate = new java.sql.Date(parsed.getTime());
 
         boolean success = teacherBLL.updateTeacherBLL(new Teacher(teacherID, lastName, firstName, hireDate));
-        
+
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa thông tin của giảng viên này không?", "Confirmation", JOptionPane.YES_NO_OPTION);
-        
+
         if (success && check == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đã sửa dữ liệu thành công!");
             fillTableTeacher();
@@ -311,15 +313,15 @@ public class teacherPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = tbTeacher.getSelectedRow();
-        if (selectedRow != -1) { 
+        if (selectedRow != -1) {
             int teacherID = Integer.parseInt(tbTeacher.getValueAt(selectedRow, 0).toString());
             boolean success = teacherBLL.deleteTeacherBLL(teacherID);
-            
+
             int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa nhân viên này không?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
             if (success && check == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, "Đã xóa dữ liệu thành công!");
-                fillTableTeacher(); 
+                fillTableTeacher();
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa dữ liệu thất bại!");
             }
@@ -343,18 +345,18 @@ public class teacherPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tbTeacherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTeacherMouseClicked
-        int i = tbTeacher.getSelectedRow();
-        if (i >= 0) {
-            txtTeacherID.setText(model.getValueAt(i, 0).toString());
-            txtLastName.setText(model.getValueAt(i, 1).toString());
-            txtFirstName.setText(model.getValueAt(i, 2).toString());
-            txtHireDate.setText(model.getValueAt(i, 3).toString());
+        int selectedRow = tbTeacher.getSelectedRow();
+        if (selectedRow != -1 && model != null) {
+            txtTeacherID.setText(model.getValueAt(selectedRow, 0).toString());
+            txtLastName.setText(model.getValueAt(selectedRow, 1).toString());
+            txtFirstName.setText(model.getValueAt(selectedRow, 2).toString());
+            txtHireDate.setText(model.getValueAt(selectedRow, 3).toString());
         }
     }//GEN-LAST:event_tbTeacherMouseClicked
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         txtFirstName.setText("");
-        txtLastName.setText(""); 
+        txtLastName.setText("");
         txtHireDate.setText("");
         txtTeacherID.setText("");
     }//GEN-LAST:event_btnResetActionPerformed

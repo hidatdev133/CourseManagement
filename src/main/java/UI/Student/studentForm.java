@@ -73,7 +73,7 @@ public class studentForm extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 161, 255));
         jLabel1.setText("STUDENT");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -87,6 +87,7 @@ public class studentForm extends javax.swing.JPanel {
                 "PersonID", "Lastname", "Firstname", "EnrollmentDate"
             }
         ));
+        jTable1.setRowHeight(30);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -110,6 +111,7 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
+        btnSearch.setBackground(new java.awt.Color(0, 161, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/search (1).png"))); // NOI18N
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +120,7 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(0, 161, 255));
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/delete (3).png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +129,7 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setBackground(new java.awt.Color(0, 161, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/add.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +138,8 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/diskette.png"))); // NOI18N
+        btnEdit.setBackground(new java.awt.Color(0, 161, 255));
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/edit-st.png"))); // NOI18N
         btnEdit.setText("Save");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +161,7 @@ public class studentForm extends javax.swing.JPanel {
 
         jLabel5.setText("EnrollmentDate");
 
+        jButton1.setBackground(new java.awt.Color(0, 161, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
         jButton1.setText("Reset");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

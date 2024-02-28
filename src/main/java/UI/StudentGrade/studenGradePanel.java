@@ -121,6 +121,14 @@ public class studenGradePanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jtStudentGrade);
+        if (jtStudentGrade.getColumnModel().getColumnCount() > 0) {
+            jtStudentGrade.getColumnModel().getColumn(0).setHeaderValue("EnrollmentID");
+            jtStudentGrade.getColumnModel().getColumn(1).setHeaderValue("CourseID");
+            jtStudentGrade.getColumnModel().getColumn(2).setHeaderValue("StudentID");
+            jtStudentGrade.getColumnModel().getColumn(3).setHeaderValue("Grade");
+            jtStudentGrade.getColumnModel().getColumn(4).setHeaderValue("Student Name");
+            jtStudentGrade.getColumnModel().getColumn(5).setHeaderValue("Course Name");
+        }
 
         btnReset.setBackground(new java.awt.Color(0, 161, 255));
         btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
