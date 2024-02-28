@@ -7,6 +7,7 @@ package UI.CourseOnline;
 import BLL.Course.DepartmentBLL;
 import BLL.Course.OnlineCourseBLL;
 import DAL.Course.Department;
+import DAL.Course.OnlineCourse;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -57,7 +58,7 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
         ArrayList<Department> listBudget = departmentBLL.searchDepartmentsByName(name);
         for(Department item : listBudget){
             txtBudget.setText(item.getBudget().toString());
-            txtAdmistrator.setText(String.valueOf(item.getAdministrator()));
+            txtAdministrator.setText(String.valueOf(item.getAdministrator()));
             txtStartDate.setText(item.getStartDate());
         }
         
@@ -88,7 +89,7 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtStartDate = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtAdmistrator = new javax.swing.JTextField();
+        txtAdministrator = new javax.swing.JTextField();
         txtBudget = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
@@ -111,7 +112,7 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(191, 191, 191))
+                .addGap(213, 213, 213))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,6 +126,12 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Credits");
+
+        cbbCredits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbCreditsActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Department");
@@ -148,7 +155,7 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Administrator");
 
-        txtAdmistrator.setEditable(false);
+        txtAdministrator.setEditable(false);
 
         txtBudget.setEditable(false);
         txtBudget.setText(" ");
@@ -188,10 +195,9 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
                             .addComponent(txtBudget)
                             .addComponent(cbbCredits, 0, 133, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addGap(26, 26, 26)
-                        .addComponent(txtAdmistrator, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
@@ -214,14 +220,14 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(txtAdmistrator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnAdd.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/online.png"))); // NOI18N
-        btnAdd.setText("  ADD");
+        btnAdd.setText("SAVE");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -326,8 +332,7 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please choose the number of CREDITS");
             return ;
         }
-        String title = txtTitle.getText();
-        int credits = Integer.parseInt(modelCbbCredits.getSelectedItem().toString());
+        
         String departmentName = modelCbbDepartment.getSelectedItem().toString();
         double budget = Double.parseDouble(txtBudget.getText());
         String startDate = txtStartDate.getText();
@@ -336,7 +341,11 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
         de.setBudget(budget);
         de.setStartDate(startDate);
         int departmentID = departmentBLL.findDepartmentIDByAllInfor(de).getDepartmentID();
-        JOptionPane.showMessageDialog(this, onlineCourseBLL.addOnlineCourse(title, credits, departmentID) );
+        OnlineCourse onl = new OnlineCourse();
+        onl.setTitle(txtTitle.getText());
+        onl.setCredit(Integer.parseInt(modelCbbCredits.getSelectedItem().toString()));
+        onl.setDepartmentID(departmentID);
+        JOptionPane.showMessageDialog(this, onlineCourseBLL.addOnlineCourse(onl) );
         parent.loadDataToTableOnlineCourses();
         
     }//GEN-LAST:event_btnAddActionPerformed
@@ -354,6 +363,10 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void cbbCreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbCreditsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbCreditsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,7 +422,7 @@ public class addOnlineCourseForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField txtAdmistrator;
+    private javax.swing.JTextField txtAdministrator;
     private javax.swing.JTextField txtBudget;
     private javax.swing.JTextField txtStartDate;
     private javax.swing.JTextField txtTitle;

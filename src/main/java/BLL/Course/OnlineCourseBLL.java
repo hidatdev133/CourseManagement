@@ -17,7 +17,7 @@ public class OnlineCourseBLL {
         ArrayList<OnlineCourse> searchList = new ArrayList<>();
         ArrayList<OnlineCourse> listCourses = courseDAL.listOfOnlineCourses();
         for(OnlineCourse item : listCourses){
-            if(item.getTitle().toLowerCase().contains(text.toLowerCase())){
+            if(item.getTitle().toLowerCase().contains(text.toLowerCase()) || String.valueOf(item.getCourseID()).contains(text) || item.getURL().toLowerCase().contains(text.toLowerCase())){
                 searchList.add(item);
             }
         }
@@ -25,11 +25,28 @@ public class OnlineCourseBLL {
     }
     
 
+    public OnlineCourse findOnlCourseByID(int id){
+        return courseDAL.findOnlCourseByID(id);
+    }
     
-    public String addOnlineCourse(String title , int credits , int departmentID){
-        boolean result = courseDAL.addOnlineCourse(title, credits, departmentID);
+    public String addOnlineCourse(OnlineCourse onl){
+        boolean result = courseDAL.addOnlineCourse(onl );
         if(result)
             return "The course is added successfully!";
         return "The course is added failed!";
+    }
+    
+    public String editOnlCourse(OnlineCourse onl){
+        boolean result = courseDAL.editOnlineCourse(onl);
+        if(result)
+            return "Edit successfully!";
+        return "Edit failed!";
+    }
+    
+    public String deleteOnlCourse(int id){
+        boolean result = courseDAL.deleteOnlineCourse(id);
+        if(result)
+            return "Delete successfully!";
+        return "Delete failed!";
     }
 }

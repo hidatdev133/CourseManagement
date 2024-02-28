@@ -35,4 +35,8 @@ public class DepartmentBLL {
         return department.findDepartmentIDByAllInfor(dpm);
     }
 
+    
+    public Department findDepartmentByID(int id){
+        return department.findDepartmentByID(id);
+    }
 }
