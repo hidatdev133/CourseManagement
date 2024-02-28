@@ -40,4 +40,22 @@ public class DepartmentDAL extends  ConnectDB{
         return de;
         
     }
+     
+     public Department findDepartmentByID(int id){
+         Department de = new Department();
+         try{
+            String sql="SELECT * FROM Department WHERE DepartmentID = " + id;
+            ResultSet rs = this.doReadQuery(sql); 
+            while(rs.next()){
+                de.setDepartmentID(rs.getInt("DepartmentID"));
+                de.setAdministrator(rs.getInt("Administrator"));
+                de.setBudget(rs.getDouble("Budget"));
+                de.setName(rs.getString("Name"));
+                de.setStartDate(rs.getString("StartDate"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return de;
+     }
 }

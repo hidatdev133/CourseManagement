@@ -5,9 +5,16 @@
 package UI.CourseOnline;
 
 import BLL.Course.OnlineCourseBLL;
+import BLL.Person.CourseInstructorBLL;
+import DAL.Course.Course;
 import DAL.Course.OnlineCourse;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableColumnModelListener;
@@ -23,7 +30,7 @@ import javax.swing.table.TableColumnModel;
 public class onlineCourseForm extends javax.swing.JPanel {
 
     OnlineCourseBLL onlineBLL = new OnlineCourseBLL();
-    
+    CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
     /**
      * Creates new form onlineCourseForm
      */
@@ -103,8 +110,8 @@ public class onlineCourseForm extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbOnlineCourse = new javax.swing.JTable();
@@ -155,20 +162,25 @@ public class onlineCourseForm extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 161, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/pencil.png"))); // NOI18N
-        jButton2.setText(" EDIT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(0, 161, 255));
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/pencil.png"))); // NOI18N
+        btnEdit.setText(" EDIT");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 161, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/delete (2).png"))); // NOI18N
-        jButton3.setText(" DELETE");
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(0, 161, 255));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/delete (2).png"))); // NOI18N
+        btnDelete.setText(" DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -178,9 +190,9 @@ public class onlineCourseForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnDelete)
                 .addGap(12, 12, 12))
         );
         jPanel3Layout.setVerticalGroup(
@@ -189,8 +201,8 @@ public class onlineCourseForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -232,7 +244,15 @@ public class onlineCourseForm extends javax.swing.JPanel {
         );
 
         tbOnlineCourse.setModel(modelTbOnlCourse);
-        tbOnlineCourse.setColumnSelectionAllowed(true);
+        tbOnlineCourse.setInheritsPopupMenu(true);
+        tbOnlineCourse.setSelectionBackground(new java.awt.Color(167, 214, 245));
+        tbOnlineCourse.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbOnlineCourse.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbOnlineCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbOnlineCourseMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbOnlineCourse);
         tbOnlineCourse.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -259,9 +279,18 @@ public class onlineCourseForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int row = tbOnlineCourse.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "Please choose online course you want to edit in table!");
+            return;
+        }
+        int id_course = Integer.parseInt(modelTbOnlCourse.getValueAt(row, 1).toString());
+        OnlineCourse onl = onlineBLL.findOnlCourseByID(id_course);
+        editOnlineCourse edit = new editOnlineCourse(this, onl);
+        edit.setVisible(true);
+    }//GEN-LAST:event_btnEditActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -289,13 +318,52 @@ public class onlineCourseForm extends javax.swing.JPanel {
         loadDataToTableOnlineCourses();
     }//GEN-LAST:event_txtSearchKeyReleased
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int row = tbOnlineCourse.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "Please choose online course you want to delete in table!");
+            return;
+        }
+        int id_course = Integer.parseInt(modelTbOnlCourse.getValueAt(row, 1).toString());
+        boolean result = courseInstructorBLL.isCourseInstructed(id_course);
+        if(result){
+             JOptionPane.showMessageDialog(this, "This course has been instructed. Please do not delete!");
+        } else {
+                int output = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete this course?","Delele online course",JOptionPane.YES_NO_OPTION );
+                if (output == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(this, onlineBLL.deleteOnlCourse(id_course));
+                    loadDataToTableOnlineCourses();
+                } 
+                
+        }
+           
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tbOnlineCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOnlineCourseMouseClicked
+        // TODO add your handling code here:
+                Point point = evt.getPoint();
+                OnlineCourse onl ;
+                int row = tbOnlineCourse.rowAtPoint(point);
+                if(evt.getClickCount() == 2 && row != -1 ){
+                        int id = Integer.parseInt(tbOnlineCourse.getValueAt(row, 1).toString());
+                        onl = onlineBLL.findOnlCourseByID(id);
+                        onl.setURL(tbOnlineCourse.getValueAt(row, 3).toString());
+                          inforOnlineCourseForm infor = new inforOnlineCourseForm(this, onl );
+                          infor.setVisible(true);
+                }
+            
+        
+    }//GEN-LAST:event_tbOnlineCourseMouseClicked
+
     private TableColumnModel modelColumnTbOnlCourse ;
     private DefaultTableCellRenderer renderer;
     private DefaultTableModel modelTbOnlCourse ;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

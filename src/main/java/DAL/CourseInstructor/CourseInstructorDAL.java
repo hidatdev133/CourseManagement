@@ -66,5 +66,17 @@ public class CourseInstructorDAL extends ConnectDB{
         return result;
     }
     
-    
+    public boolean isCourseInstructed(int id){
+        boolean result = false ;
+        try {
+            String sql ="SELECT * FROM courseinstructor WHERE courseid = " + id ;
+            ResultSet rs = this.doReadQuery(sql);
+            if(rs.next()){
+                result = true ;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result ;
+    }
 }
