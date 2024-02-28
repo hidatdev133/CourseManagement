@@ -1,14 +1,20 @@
 package UI.Menu;
-
+import UI.OnsiteCourse.OnsiteCourseForm;
+import UI.CourseOnline.onlineCourseForm;
 import UI.Student.studentForm;
 import UI.StudentGrade.studenGradePanel;
+import UI.Teacher.teacherPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
 public class menuForm extends javax.swing.JFrame {
 
     studenGradePanel sgp = new studenGradePanel();
+   
     studentForm stdf = new studentForm();
+     OnsiteCourseForm onsiteForm=new OnsiteCourseForm();
+    teacherPanel teacherPanel = new teacherPanel();
+    onlineCourseForm online = new onlineCourseForm();
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -355,7 +361,7 @@ public class menuForm extends javax.swing.JFrame {
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
 
-        jPanel4.add(sgp);
+        jPanel4.add(teacherPanel);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
@@ -408,8 +414,8 @@ public class menuForm extends javax.swing.JFrame {
     private void btnOnlineCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnlineCourseActionPerformed
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
-
-        jPanel4.add(sgp);
+        
+        jPanel4.add(online);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
@@ -427,7 +433,7 @@ public class menuForm extends javax.swing.JFrame {
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
 
-        jPanel4.add(sgp);
+        jPanel4.add(onsiteForm);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
