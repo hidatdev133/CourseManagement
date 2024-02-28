@@ -17,6 +17,7 @@ public class OnlineCourseDAL extends ConnectDB {
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setURL(rs.getString("url"));
                 course.setTitle(rs.getString("Title"));
+                course.setDepartmentID(rs.getInt("DepartmentID"));
                 list.add(course);
             }
         } catch (Exception e) {
