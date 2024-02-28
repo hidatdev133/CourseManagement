@@ -237,7 +237,7 @@ public class studenGradePanel extends javax.swing.JPanel {
                                         .addComponent(btnDelete)
                                         .addGap(74, 74, 74)
                                         .addComponent(btnSearch)))
-                                .addGap(0, 114, Short.MAX_VALUE)))))
+                                .addGap(0, 70, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -253,7 +253,7 @@ public class studenGradePanel extends javax.swing.JPanel {
                     .addComponent(btnEdit)
                     .addComponent(btnDelete)
                     .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

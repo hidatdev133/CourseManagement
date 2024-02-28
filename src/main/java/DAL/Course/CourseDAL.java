@@ -3,6 +3,7 @@ package DAL.Course;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import ConnectDB.ConnectDB;
+import java.sql.SQLException;
 
 
 public class CourseDAL extends ConnectDB {
@@ -19,6 +20,26 @@ public class CourseDAL extends ConnectDB {
             }
             return list;
         } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public ArrayList<Course> readCourse() throws SQLException {
+
+        String query = "SELECT * FROM course ";
+        ResultSet rs = CourseDAL.doReadQuery(query);
+        ArrayList list = new ArrayList();
+
+        if (rs != null) {
+            int i = 1;
+            while (rs.next()) {
+                Course c = new Course();
+                c.setCourseID(rs.getInt("CourseID"));
+                c.setCredit(rs.getInt("Credits"));
+                c.setDepartmentID(rs.getInt("DepartmentID"));
+                c.setTitle(rs.getString("Title"));
+                list.add(c);
+            }
         }
         return list;
     }

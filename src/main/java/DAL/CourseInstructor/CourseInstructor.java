@@ -1,5 +1,7 @@
 package DAL.CourseInstructor;
 
+import java.util.Vector;
+
 public class CourseInstructor {
     private int CourseID;
     private int PersonID;
@@ -9,8 +11,7 @@ public class CourseInstructor {
         this.PersonID = PersonID;
     }
 
-    CourseInstructor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public CourseInstructor() {
     }
 
     public int getCourseID() {
@@ -28,4 +29,12 @@ public class CourseInstructor {
     public void setPersonID(int PersonID) {
         this.PersonID = PersonID;
     }
+     public String getALL() {
+        return (PersonID+" "+ CourseID+" ");
+    }
+
+    public Vector<?> toArray() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
