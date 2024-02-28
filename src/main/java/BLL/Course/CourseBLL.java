@@ -19,7 +19,7 @@ public class CourseBLL {
         Course course=new Course();
 //        course.setCourseID(id);
         course.setTitle(Title);
-        course.setCredits(Credits);
+        course.setCredit(Credits);
         course.setDepartmentID(Department);
         if(courseDAL.addCourse(course)>0){
             return true;
@@ -31,7 +31,7 @@ public class CourseBLL {
         Course course=new Course();
         course.setCourseID(id);
         course.setTitle(Title);
-        course.setCredits(credit);
+        course.setCredit(credit);
         course.setDepartmentID(Department);
         if(courseDAL.updateCourse(course)>0){
             return true;

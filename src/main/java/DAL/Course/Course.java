@@ -2,15 +2,15 @@ package DAL.Course;
 
 
 public class Course {
-    int CourseID,Credits, DepartmentID;
+    int CourseID,Credit, DepartmentID;
     String title;
 
     public Course() {
     }
 
-    public Course(int CourseID, int Credits, int DepartmentID, String title) {
+    public Course(int CourseID, int Credit, int DepartmentID, String title) {
         this.CourseID = CourseID;
-        this.Credits = Credits;
+        this.Credit = Credit;
         this.DepartmentID = DepartmentID;
         this.title = title;
     }
@@ -23,12 +23,12 @@ public class Course {
         this.CourseID = CourseID;
     }
 
-    public int getCredits() {
-        return Credits;
+    public int getCredit() {
+        return Credit;
     }
 
-    public void setCredits(int Credits) {
-        this.Credits = Credits;
+    public void setCredit(int Credit) {
+        this.Credit = Credit;
     }
 
     public int getDepartmentID() {

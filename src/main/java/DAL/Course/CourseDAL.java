@@ -33,7 +33,7 @@ public class CourseDAL extends ConnectDB {
                 Course course=new Course();
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setTitle(rs.getString("Title"));
-                course.setCredits(rs.getInt("Credits"));
+                course.setCredit(rs.getInt("Credits"));
                 course.setDepartmentID(rs.getInt("DepartmentID"));
                 CourseList.add(course);
             }
@@ -49,7 +49,7 @@ public class CourseDAL extends ConnectDB {
             PreparedStatement pre=con.prepareStatement(sql);
 //            pre.setInt(1, course.getCourseID());
             pre.setString(1, course.getTitle());
-            pre.setInt(2, course.Credits);
+            pre.setInt(2, course.getCredit());
             pre.setInt(3, course.getDepartmentID());
             return pre.executeUpdate();
         }catch(Exception e){
@@ -65,7 +65,7 @@ public class CourseDAL extends ConnectDB {
           PreparedStatement pre=con.prepareStatement(sql);
         
           pre.setString(1,course.getTitle());
-          pre.setInt(2, course.getCredits());
+          pre.setInt(2, course.getCredit());
           pre.setInt(3, course.getDepartmentID());
             pre.setInt(4, course.getCourseID());
           return pre.executeUpdate();
