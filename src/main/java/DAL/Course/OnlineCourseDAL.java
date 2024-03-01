@@ -70,7 +70,8 @@ public class OnlineCourseDAL extends ConnectDB {
     public boolean editOnlineCourse(OnlineCourse onl){
         boolean result = false ;
         try {
-            String sql = "UPDATE Course SET Title = '" + onl.getTitle() + "' , Credits = " + onl.getCredit() +" , DepartmentID = " + onl.getDepartmentID() + " WHERE CourseID = " + onl.getCourseID();
+            String sql = "UPDATE Course SET Title = '" + onl.getTitle() + "' , Credits = " + onl.getCredit() +" , DepartmentID = " + onl.getDepartmentID() + 
+                    " WHERE CourseID = " + onl.getCourseID();
             Statement stmt = this.getConnection().createStatement();
             if(stmt.executeUpdate(sql) >= 1 ){
                 result = true ;
