@@ -39,8 +39,4 @@ public class DepartmentBLL {
     public Department findDepartmentByID(int id){
         return department.findDepartmentByID(id);
     }
-    
-    public String getNameAdministrator(int id){
-        return department.getNameAdminstrator(id);
-    }
 }

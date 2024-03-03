@@ -17,8 +17,7 @@ public class OnlineCourseBLL {
         ArrayList<OnlineCourse> searchList = new ArrayList<>();
         ArrayList<OnlineCourse> listCourses = courseDAL.listOfOnlineCourses();
         for(OnlineCourse item : listCourses){
-            if(item.getTitle().toLowerCase().contains(text.toLowerCase()) || String.valueOf(item.getCourseID()).contains(text) 
-                    || item.getURL().toLowerCase().contains(text.toLowerCase())){
+            if(item.getTitle().toLowerCase().contains(text.toLowerCase()) || String.valueOf(item.getCourseID()).contains(text) || item.getURL().toLowerCase().contains(text.toLowerCase())){
                 searchList.add(item);
             }
         }
