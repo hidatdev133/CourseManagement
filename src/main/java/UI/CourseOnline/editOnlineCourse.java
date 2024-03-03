@@ -293,7 +293,7 @@ public class editOnlineCourse extends javax.swing.JFrame {
         onl.setCredit(Integer.parseInt(cbbCredits.getSelectedItem().toString()));
         onl.setDepartmentID(departmentID);
         JOptionPane.showMessageDialog(this, onlineCourseBLL.editOnlCourse(onl));
-        parent.loadDataToTableOnlineCourses();
+        parent.loadDataToTableCourses();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void cbbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbDepartmentActionPerformed

@@ -4,18 +4,22 @@
  */
 package UI.CourseOnline;
 
+import BLL.Course.CourseBLL;
 import BLL.Course.DepartmentBLL;
 import BLL.Course.OnlineCourseBLL;
+import BLL.Course.OnsiteCourseBLL;
 import BLL.Person.CourseInstructorBLL;
 import DAL.Course.Course;
 import DAL.Course.Department;
 import DAL.Course.OnlineCourse;
+import DAL.Course.OnsiteCourse;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,6 +40,8 @@ public class onlineCourseForm extends javax.swing.JPanel {
     DepartmentBLL deBLL = new DepartmentBLL();
     OnlineCourseBLL onlineBLL = new OnlineCourseBLL();
     CourseInstructorBLL courseInstructorBLL = new CourseInstructorBLL();
+    CourseBLL courseBLL = new CourseBLL();
+    OnsiteCourseBLL onsiteCourseBLL = new OnsiteCourseBLL();
     
     /**
      * Creates new form onlineCourseForm
@@ -44,7 +50,7 @@ public class onlineCourseForm extends javax.swing.JPanel {
         moreInits();
         initComponents();
         
-        loadDataToTableOnlineCourses();
+        loadDataToTableCourses();
     }
 
     public void moreInits(){
@@ -64,8 +70,10 @@ public class onlineCourseForm extends javax.swing.JPanel {
        modelTbOnlCourse.addColumn("STT");
        modelTbOnlCourse.addColumn("ID of Course");
        modelTbOnlCourse.addColumn("Title of Course");
-       modelTbOnlCourse.addColumn("Link of Course");
+       modelTbOnlCourse.addColumn("Credits");
        modelTbOnlCourse.addColumn("Department");
+       modelTbOnlCourse.addColumn("Administrator");
+       modelTbOnlCourse.addColumn("No.Students");
        
        scrollpane = new JScrollPane();
        scrollpane.setViewportView(tbOnlineCourse);
@@ -74,17 +82,18 @@ public class onlineCourseForm extends javax.swing.JPanel {
        
        
     }
-    public void getListOfOnlineCourse(ArrayList<OnlineCourse> listCourse){
+    public void getListOfCourse(ArrayList<Course> listCourse){
         modelTbOnlCourse.setRowCount(0);
         int stt = 0;
-        for (OnlineCourse item : listCourse) {
+        for (Course item : listCourse) {
             int id = item.getCourseID();
-            String url = item.getURL();
             stt ++;
             String title = item.getTitle();
+            int credits = item.getCredit();
             Department de = deBLL.findDepartmentByID(item.getDepartmentID());
             String department = de.getName();
-            Object[] data = {stt,id, title, url, department};
+            String administrator = deBLL.getAdministratorName(de.getAdministrator());
+            Object[] data = {stt,id, title, credits , department, administrator};
             modelTbOnlCourse.addRow(data);
         }
          for(int i = 0; i < tbOnlineCourse.getColumnCount(); i++){
@@ -92,25 +101,103 @@ public class onlineCourseForm extends javax.swing.JPanel {
         }
     }
     
-    public void loadDataToTableOnlineCourses(){
-        
-        String text = txtSearch.getText();
-        if(!text.isEmpty()) {
-                ArrayList<OnlineCourse> listCourses = onlineBLL.searchAllOnlCourses(text);
-                getListOfOnlineCourse(listCourses);
-                
-        } else {
-                ArrayList<OnlineCourse> listCourses = onlineBLL.listOfOnlineCourse();
-                getListOfOnlineCourse(listCourses);
+    public void getListOfOnsiteCourse(ArrayList<OnsiteCourse> listCourse){
+        modelTbOnlCourse.setRowCount(0);
+        int stt = 0;
+        for (OnsiteCourse item : listCourse) {
+            int id = item.getCourseID();
+            stt ++;
+            String title = item.getTitle();
+            int credit = item.getCredits();
+            Department de = deBLL.findDepartmentByID(item.getDepartmentID());
+            String department = de.getName();
+            String administrator = deBLL.getAdministratorName(de.getAdministrator());
+            Object[] data = {stt,id, title,credit,  department, administrator};
+            modelTbOnlCourse.addRow(data);
         }
+         for(int i = 0; i < tbOnlineCourse.getColumnCount(); i++){
+            tbOnlineCourse.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+    }
+    
+    public void getListOfOnlineCourse(ArrayList<OnlineCourse> listCourse){
+        modelTbOnlCourse.setRowCount(0);
+        int stt = 0;
+        for (OnlineCourse item : listCourse) {
+            int id = item.getCourseID();
+            stt ++;
+            String title = item.getTitle();
+            int credits = item.getCredit();
+            Department de = deBLL.findDepartmentByID(item.getDepartmentID());
+            String department = de.getName();
+            String administrator = deBLL.getAdministratorName(de.getAdministrator());
+            Object[] data = {stt,id, title, credits , department, administrator};
+            modelTbOnlCourse.addRow(data);
+        }
+         for(int i = 0; i < tbOnlineCourse.getColumnCount(); i++){
+            tbOnlineCourse.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+    }
+    
+    
+    public void loadDataToTableCourses(){
+        
+        modelCbbCourses = (DefaultComboBoxModel) cbbCourses.getModel();
+        
+        
+        String choice = modelCbbCourses.getSelectedItem().toString();
+        switch (choice) {
+            case "All Courses":
+                ArrayList<Course> listCourse ;
+                listCourse = courseBLL.readCourseBLL();
+                getListOfCourse(listCourse);
+                break;
+            case "Online Courses":
+                ArrayList<OnlineCourse> listOnlineCourse = onlineBLL.listOfOnlineCourse();
+                getListOfOnlineCourse(listOnlineCourse);
+                break;
+            case "Onsite Courses":
+                ArrayList<OnsiteCourse> listOnsiteCourse = onsiteCourseBLL.readOnsiteCourse();
+                getListOfOnsiteCourse(listOnsiteCourse);
+                break;
+            default:
+                System.out.println("Load table failed");
+        }
+       
         
         TableColumnModel columnModel = tbOnlineCourse.getColumnModel();
        columnModel.getColumn(0).setPreferredWidth(1);
        columnModel.getColumn(1).setPreferredWidth(30);
        columnModel.getColumn(2).setPreferredWidth(100);
-       columnModel.getColumn(3).setPreferredWidth(200);
-       columnModel.getColumn(4).setPreferredWidth(50);
+       columnModel.getColumn(3).setPreferredWidth(50);
+       columnModel.getColumn(4).setPreferredWidth(150);
+       columnModel.getColumn(5).setPreferredWidth(30);
 
+    }
+    
+    public void loadSearchDataToTable(){
+        modelTbOnlCourse.setRowCount(0);
+        String text = txtSearch.getText();
+        
+        int stt = 0;
+        
+        String choice = modelCbbCourses.getSelectedItem().toString();
+        switch (choice) {
+            case "All Courses":
+                ArrayList<Course> listSearch = courseBLL.searchAllOnlCourses(text);
+                getListOfCourse(listSearch);
+                break;
+            case "Online Courses":
+                ArrayList<OnlineCourse> listOnlineCourse = onlineBLL.searchAllOnlCourses(text);
+                getListOfOnlineCourse(listOnlineCourse);
+                break;
+            case "Onsite Courses":
+                ArrayList<OnsiteCourse> listOnsiteCourse = onsiteCourseBLL.listOnsiteSearchBLL(text);
+                getListOfOnsiteCourse(listOnsiteCourse);
+                break;
+            default:
+                System.out.println("Load table failed");
+        }
     }
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -137,12 +224,13 @@ public class onlineCourseForm extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
+        cbbCourses = new javax.swing.JComboBox<>();
         scrollpane = new javax.swing.JScrollPane();
         tbOnlineCourse = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 161, 255));
-        jLabel1.setText("ONLINE COURSES");
+        jLabel1.setText(" COURSES");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -150,16 +238,16 @@ public class onlineCourseForm extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(272, 272, 272)
+                .addGap(357, 357, 357)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Features"));
@@ -201,11 +289,11 @@ public class onlineCourseForm extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
-                .addGap(12, 12, 12))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +308,11 @@ public class onlineCourseForm extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Search"));
 
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
@@ -249,15 +342,27 @@ public class onlineCourseForm extends javax.swing.JPanel {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
+        cbbCourses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Courses", "Onsite Courses", "Online Courses", " " }));
+        cbbCourses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbCoursesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cbbCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,7 +372,9 @@ public class onlineCourseForm extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbbCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         tbOnlineCourse.setModel(modelTbOnlCourse);
@@ -299,10 +406,10 @@ public class onlineCourseForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -328,17 +435,17 @@ public class onlineCourseForm extends javax.swing.JPanel {
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
         // TODO add your handling code here:
-        loadDataToTableOnlineCourses();
+        loadSearchDataToTable();
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
         // TODO add your handling code here:
-       loadDataToTableOnlineCourses();
+       loadSearchDataToTable();
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         // TODO add your handling code here:
-        loadDataToTableOnlineCourses();
+      loadSearchDataToTable();
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -356,7 +463,7 @@ public class onlineCourseForm extends javax.swing.JPanel {
                 int output = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete this course?","Delele online course",JOptionPane.YES_NO_OPTION );
                 if (output == JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(this, onlineBLL.deleteOnlCourse(id_course));
-                    loadDataToTableOnlineCourses();
+                    loadDataToTableCourses();
                 } 
                 
         }
@@ -380,6 +487,17 @@ public class onlineCourseForm extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tbOnlineCourseMouseClicked
 
+    private void cbbCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbCoursesActionPerformed
+        // TODO add your handling code here:
+        loadDataToTableCourses();
+    }//GEN-LAST:event_cbbCoursesActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+        loadSearchDataToTable();
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private DefaultComboBoxModel modelCbbCourses ;
     private TableColumnModel modelColumnTbOnlCourse ;
     private DefaultTableCellRenderer renderer;
     private DefaultTableModel modelTbOnlCourse ;
@@ -387,6 +505,7 @@ public class onlineCourseForm extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JComboBox<String> cbbCourses;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

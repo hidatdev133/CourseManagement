@@ -50,4 +50,15 @@ public class CourseBLL {
     public boolean deletecoursonsite(int courseId){
         return courseDAL.DeleteCourse(courseId);
     }
+    
+    public ArrayList<Course> searchAllOnlCourses(String text){
+        ArrayList<Course> searchList = new ArrayList<>();
+        ArrayList<Course> listCourses = courseDAL.readCourseDAL();
+        for(Course item : listCourses){
+            if(item.getTitle().toLowerCase().contains(text.toLowerCase()) || String.valueOf(item.getCourseID()).contains(text) ){
+                searchList.add(item);
+            }
+        }
+        return searchList;
+    }
 }
