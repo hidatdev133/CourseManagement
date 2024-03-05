@@ -29,7 +29,7 @@ public class OnlineCourseDAL extends ConnectDB {
     public OnlineCourse findOnlCourseByID(int id){
         OnlineCourse onlCourse = null;
         try {
-            String sql = "SELECT * FROM Course WHERE CourseID = " + id ;
+            String sql = "SELECT * FROM Course , OnlineCourse WHERE Course.CourseID = OnlineCourse.CourseID AND Course.CourseID = " + id ;
             ResultSet rs = this.doReadQuery(sql);
             while(rs.next()){
                 onlCourse = new OnlineCourse();
@@ -37,6 +37,7 @@ public class OnlineCourseDAL extends ConnectDB {
                 onlCourse.setCredit(rs.getInt("Credits"));
                 onlCourse.setDepartmentID(rs.getInt("DepartmentID"));
                 onlCourse.setTitle(rs.getString("Title"));
+                onlCourse.setURL(rs.getString("url"));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -52,7 +53,7 @@ public class OnlineCourseDAL extends ConnectDB {
             if(rs.next()){
                 int course_id = rs.getInt(1) + 1;
                  String sql = "INSERT INTO `Course` (`CourseID`, `Title`, `Credits`, `DepartmentID`) VALUES (" + course_id + ", '" + onl.getTitle() + "', " + onl.getCredit() + ", " + onl.getDepartmentID() + ");\n";
-                 String sql2 = "INSERT INTO  `OnlineCourse` (`CourseID`, `url`) VALUES (" + course_id + " , 'http://www.fineartschool.net/" + onl.getTitle() +"_" + course_id + "')";
+                 String sql2 = "INSERT INTO  `OnlineCourse` (`CourseID`, `url`) VALUES (" + course_id + " , '"+ onl.getURL() + "')";
                 Statement stmt = this.getConnection().createStatement();
                 if(stmt.executeUpdate(sql) >= 1){
                     if(stmt.executeUpdate(sql2) >= 1)
@@ -70,7 +71,7 @@ public class OnlineCourseDAL extends ConnectDB {
     public boolean editOnlineCourse(OnlineCourse onl){
         boolean result = false ;
         try {
-            String sql = "UPDATE Course SET Title = '" + onl.getTitle() + "' , Credits = " + onl.getCredit() +" , DepartmentID = " + onl.getDepartmentID() + " WHERE CourseID = " + onl.getCourseID();
+            String sql = "UPDATE Course SET Title = '" + onl.getTitle() + "' , Credits = " + onl.getCredit() +" , DepartmentID = " + onl.getDepartmentID() + " , URL = '" + onl.getURL() + "' WHERE CourseID = " + onl.getCourseID();
             Statement stmt = this.getConnection().createStatement();
             if(stmt.executeUpdate(sql) >= 1 ){
                 result = true ;
@@ -96,5 +97,19 @@ public class OnlineCourseDAL extends ConnectDB {
             System.out.println(e);
         }
         return  result;
+    }
+    
+    public boolean isOnlineCourse(int id){
+        boolean result = false ;
+        try {
+            String sql = "SELECT * FROM Course , OnlineCourse WHERE Course.CourseID = OnlineCourse.CourseID AND Course.CourseID =" + id ;
+            ResultSet rs = this.doReadQuery(sql);
+            if(rs.next()){
+                result = true ;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result ;
     }
 }

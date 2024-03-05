@@ -49,4 +49,8 @@ public class OnlineCourseBLL {
             return "Delete successfully!";
         return "Delete failed!";
     }
+    
+    public boolean isOnlineCourse(int id){
+        return courseDAL.isOnlineCourse(id);
+    }
 }

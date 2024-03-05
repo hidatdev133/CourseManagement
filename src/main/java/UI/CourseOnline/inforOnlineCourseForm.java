@@ -5,7 +5,7 @@ import BLL.Course.DepartmentBLL;
 import DAL.Course.Course;
 import DAL.Course.Department;
 import DAL.Course.OnlineCourse;
-import UI.CourseOnline.onlineCourseForm;
+import UI.Course.CourseForm;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +23,7 @@ public class inforOnlineCourseForm extends javax.swing.JFrame {
      */
     OnlineCourse course ;
     DepartmentBLL deBLL = new DepartmentBLL();
-    public inforOnlineCourseForm(onlineCourseForm frame, OnlineCourse onl) {
+    public inforOnlineCourseForm(CourseForm frame, OnlineCourse onl) {
         initComponents();
         course = onl;
         loadInformation();
@@ -35,7 +35,7 @@ public class inforOnlineCourseForm extends javax.swing.JFrame {
         txtCredits.setText(String.valueOf(course.getCredit()));
         txtURL.setText(course.getURL());
         Department de = deBLL.findDepartmentByID(course.getDepartmentID());
-        txtAdministrator.setText(String.valueOf(de.getAdministrator()));
+        txtAdministrator.setText(deBLL.getAdministratorName(de.getAdministrator()));
         txtBudget.setText(String.valueOf(de.getBudget()));
         txtDepartment.setText(de.getName());
         txtStartDate.setText(de.getStartDate());
