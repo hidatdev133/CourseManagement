@@ -66,6 +66,19 @@ public class addCourseForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter LINK OF COURSE!");
             return ;
         }
+        
+        ArrayList<OnlineCourse> listOnl = onlineCourseBLL.listOfOnlineCourse();
+        for(OnlineCourse onlCourse : listOnl){
+            if(txtTitle.getText().equals(onlCourse.getTitle())){
+                JOptionPane.showMessageDialog(this, "The title of course existed!");
+                return ;
+            }
+            if(txtURL.getText().equals(onlCourse.getURL())){
+                JOptionPane.showMessageDialog(this, "The link of course existed!");
+                return ;
+            }
+        }
+            
         String departmentName = modelCbbDepartment.getSelectedItem().toString();
         double budget = Double.parseDouble(txtBudget.getText());
         String startDate = txtStartDate.getText();
@@ -74,6 +87,8 @@ public class addCourseForm extends javax.swing.JFrame {
         de.setBudget(budget);
         de.setStartDate(startDate);
         int departmentID = departmentBLL.findDepartmentIDByAllInfor(de).getDepartmentID();
+        
+        
         OnlineCourse onl = new OnlineCourse();
         onl.setTitle(txtTitle.getText());
         onl.setCredit(Integer.parseInt(modelCbbCredits.getSelectedItem().toString()));
@@ -475,12 +490,16 @@ public class addCourseForm extends javax.swing.JFrame {
             return ;
         }
 
-       if(modelCbbTypeOfCourse.getSelectedItem().equals("Online Course")){
-           addOnlineCourse();
-       } else {
-           // add onsite course code here
-       }
-        parent.loadDataToTableCourses();
+        int output = JOptionPane.showConfirmDialog(this,"Are you sure you want to add this course?","Add online course",JOptionPane.YES_NO_OPTION );
+            if (output == JOptionPane.YES_OPTION) {
+                if(modelCbbTypeOfCourse.getSelectedItem().equals("Online Course")){
+                    addOnlineCourse();
+                } else {
+               // add onsite course code here
+                }
+                    parent.loadDataToTableCourses();
+            }
+       
 
     }//GEN-LAST:event_btnAddActionPerformed
 

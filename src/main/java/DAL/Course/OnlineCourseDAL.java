@@ -17,6 +17,7 @@ public class OnlineCourseDAL extends ConnectDB {
                 course.setCourseID(rs.getInt("CourseID"));
                 course.setURL(rs.getString("url"));
                 course.setTitle(rs.getString("Title"));
+                course.setCredit(rs.getInt("Credits"));
                 course.setDepartmentID(rs.getInt("DepartmentID"));
                 list.add(course);
             }
@@ -71,9 +72,10 @@ public class OnlineCourseDAL extends ConnectDB {
     public boolean editOnlineCourse(OnlineCourse onl){
         boolean result = false ;
         try {
-            String sql = "UPDATE Course SET Title = '" + onl.getTitle() + "' , Credits = " + onl.getCredit() +" , DepartmentID = " + onl.getDepartmentID() + " , URL = '" + onl.getURL() + "' WHERE CourseID = " + onl.getCourseID();
+            String sql = "UPDATE Course SET Title = '" + onl.getTitle() + "' , Credits = " + onl.getCredit() +" , DepartmentID = " + onl.getDepartmentID() + "  WHERE CourseID = " + onl.getCourseID();
+            String sql1 = "UPDATE OnlineCourse SET url = '" + onl.getURL() + "' WHERE CourseID = " + onl.getCourseID() ;
             Statement stmt = this.getConnection().createStatement();
-            if(stmt.executeUpdate(sql) >= 1 ){
+            if(stmt.executeUpdate(sql) >= 1 && stmt.executeUpdate(sql1) >= 1 ){
                 result = true ;
             }
         } catch (Exception e) {

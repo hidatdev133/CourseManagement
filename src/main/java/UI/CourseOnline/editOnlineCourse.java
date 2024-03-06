@@ -33,6 +33,7 @@ public class editOnlineCourse extends javax.swing.JFrame {
         loadCbbCredits();
         loadCbbDepartment();
         txtTitle.setText(onl.getTitle());
+        txtURL.setText(onlCourse.getURL());
     }
 
     public void loadCbbCredits(){
@@ -298,23 +299,29 @@ public class editOnlineCourse extends javax.swing.JFrame {
             return;
         }
         
-        String departmentName = modelCbbDepartment.getSelectedItem().toString();
-        double budget = Double.parseDouble(txtBudget.getText());
-        String startDate = txtStartDate.getText();
-        Department de = new Department();
-        de.setName(departmentName);
-        de.setBudget(budget);
-        de.setStartDate(startDate);
-        int departmentID = departmentBLL.findDepartmentIDByAllInfor(de).getDepartmentID();
-        
-        OnlineCourse onl = new OnlineCourse();
-        onl.setCourseID(onlCourse.getCourseID());
-        onl.setTitle(txtTitle.getText());
-        onl.setCredit(Integer.parseInt(cbbCredits.getSelectedItem().toString()));
-        onl.setDepartmentID(departmentID);
-        onl.setURL(txtURL.getText());
-        JOptionPane.showMessageDialog(this, onlineCourseBLL.editOnlCourse(onl));
-        parent.loadDataToTableCourses();
+        int output = JOptionPane.showConfirmDialog(this,"Are you sure you want to edit this course?","Edit online course",JOptionPane.YES_NO_OPTION );
+            if (output == JOptionPane.NO_OPTION) {
+                
+            } else {
+                 String departmentName = modelCbbDepartment.getSelectedItem().toString();
+                double budget = Double.parseDouble(txtBudget.getText());
+                String startDate = txtStartDate.getText();
+                Department de = new Department();
+                de.setName(departmentName);
+                de.setBudget(budget);
+                de.setStartDate(startDate);
+                int departmentID = departmentBLL.findDepartmentIDByAllInfor(de).getDepartmentID();
+
+                OnlineCourse onl = new OnlineCourse();
+                onl.setCourseID(onlCourse.getCourseID());
+                onl.setTitle(txtTitle.getText());
+                onl.setCredit(Integer.parseInt(cbbCredits.getSelectedItem().toString()));
+                onl.setDepartmentID(departmentID);
+                onl.setURL(txtURL.getText());
+                JOptionPane.showMessageDialog(this, onlineCourseBLL.editOnlCourse(onl));
+                parent.loadDataToTableCourses();
+            }
+       
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void cbbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbDepartmentActionPerformed

@@ -439,9 +439,14 @@ public class CourseForm extends javax.swing.JPanel {
             return;
         }
         int id_course = Integer.parseInt(modelTbOnlCourse.getValueAt(row, 1).toString());
-        OnlineCourse onl = onlineBLL.findOnlCourseByID(id_course);
-        editOnlineCourse edit = new editOnlineCourse(this, onl);
-        edit.setVisible(true);
+        if(onlineBLL.isOnlineCourse(id_course)){
+            OnlineCourse onl = onlineBLL.findOnlCourseByID(id_course);
+            editOnlineCourse edit = new editOnlineCourse(this, onl);
+            edit.setVisible(true);
+        } else {
+            
+        }
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
