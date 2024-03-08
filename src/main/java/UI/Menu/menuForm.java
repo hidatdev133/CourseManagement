@@ -1,6 +1,5 @@
 package UI.Menu;
-import UI.OnsiteCourse.OnsiteCourseForm;
-import UI.CourseOnline.onlineCourseForm;
+import UI.Course.CourseForm;
 import UI.Student.studentForm;
 import UI.StudentGrade.studenGradePanel;
 import UI.Teacher.teacherPanel;
@@ -10,11 +9,10 @@ import java.awt.Color;
 public class menuForm extends javax.swing.JFrame {
 
     studenGradePanel sgp = new studenGradePanel();
-   
+    CourseForm courseForm = new CourseForm();
     studentForm stdf = new studentForm();
-     OnsiteCourseForm onsiteForm=new OnsiteCourseForm();
     teacherPanel teacherPanel = new teacherPanel();
-    onlineCourseForm online = new onlineCourseForm();
+
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -34,8 +32,7 @@ public class menuForm extends javax.swing.JFrame {
         btnTeacher = new javax.swing.JButton();
         btnStudentGrade = new javax.swing.JButton();
         btnCourseInstructor = new javax.swing.JButton();
-        btnOnlineCourse = new javax.swing.JButton();
-        btnOnsiteCourse = new javax.swing.JButton();
+        btnCourse = new javax.swing.JButton();
         btnStudent = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -104,27 +101,15 @@ public class menuForm extends javax.swing.JFrame {
             }
         });
 
-        btnOnlineCourse.setBackground(new java.awt.Color(51, 204, 0));
-        btnOnlineCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/online-course.png"))); // NOI18N
-        btnOnlineCourse.setText("Online Course");
-        btnOnlineCourse.setMaximumSize(new java.awt.Dimension(119, 38));
-        btnOnlineCourse.setMinimumSize(new java.awt.Dimension(119, 38));
-        btnOnlineCourse.setPreferredSize(new java.awt.Dimension(119, 38));
-        btnOnlineCourse.addActionListener(new java.awt.event.ActionListener() {
+        btnCourse.setBackground(new java.awt.Color(51, 204, 0));
+        btnCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/onsite-course.png"))); // NOI18N
+        btnCourse.setText("    Course");
+        btnCourse.setMaximumSize(new java.awt.Dimension(119, 38));
+        btnCourse.setMinimumSize(new java.awt.Dimension(119, 38));
+        btnCourse.setPreferredSize(new java.awt.Dimension(119, 38));
+        btnCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOnlineCourseActionPerformed(evt);
-            }
-        });
-
-        btnOnsiteCourse.setBackground(new java.awt.Color(51, 204, 0));
-        btnOnsiteCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/onsite-course.png"))); // NOI18N
-        btnOnsiteCourse.setText("Onsite Course");
-        btnOnsiteCourse.setMaximumSize(new java.awt.Dimension(119, 38));
-        btnOnsiteCourse.setMinimumSize(new java.awt.Dimension(119, 38));
-        btnOnsiteCourse.setPreferredSize(new java.awt.Dimension(119, 38));
-        btnOnsiteCourse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOnsiteCourseActionPerformed(evt);
+                btnCourseActionPerformed(evt);
             }
         });
 
@@ -163,11 +148,10 @@ public class menuForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnStudentGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCourseInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOnlineCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCourseInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnOnsiteCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -197,11 +181,9 @@ public class menuForm extends javax.swing.JFrame {
                 .addComponent(btnStudentGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCourseInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnOnlineCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnOnsiteCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addComponent(btnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
 
         jPanel4.setPreferredSize(new java.awt.Dimension(950, 513));
@@ -249,7 +231,7 @@ public class menuForm extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(129, 129, 129))
         );
@@ -353,8 +335,7 @@ public class menuForm extends javax.swing.JFrame {
         btnTeacher.setBackground(new Color(51, 204, 0));
         btnStudentGrade.setBackground(new Color(51, 204, 0));
         btnCourseInstructor.setBackground(new Color(51, 204, 0));
-        btnOnlineCourse.setBackground(new Color(51, 204, 0));
-        btnOnsiteCourse.setBackground(new Color(51, 204, 0));
+        btnCourse.setBackground(new Color(51, 204, 0));
     }//GEN-LAST:event_btnHomePageActionPerformed
 
     private void btnTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherActionPerformed
@@ -370,8 +351,7 @@ public class menuForm extends javax.swing.JFrame {
         btnStudent.setBackground(new Color(51, 204, 0));
         btnStudentGrade.setBackground(new Color(51, 204, 0));
         btnHomePage.setBackground(new Color(51, 204, 0));
-        btnOnsiteCourse.setBackground(new Color(51, 204, 0));
-        btnOnlineCourse.setBackground(new Color(51, 204, 0));
+        btnCourse.setBackground(new Color(51, 204, 0));
         btnCourseInstructor.setBackground(new Color(51, 204, 0));
     }//GEN-LAST:event_btnTeacherActionPerformed
 
@@ -389,8 +369,7 @@ public class menuForm extends javax.swing.JFrame {
         btnTeacher.setBackground(new Color(51, 204, 0));
         btnStudent.setBackground(new Color(51, 204, 0));
         btnCourseInstructor.setBackground(new Color(51, 204, 0));
-        btnOnlineCourse.setBackground(new Color(51, 204, 0));
-        btnOnsiteCourse.setBackground(new Color(51, 204, 0));
+        btnCourse.setBackground(new Color(51, 204, 0));
     }//GEN-LAST:event_btnStudentGradeActionPerformed
 
     private void btnCourseInstructorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseInstructorActionPerformed
@@ -407,45 +386,25 @@ public class menuForm extends javax.swing.JFrame {
         btnTeacher.setBackground(new Color(51, 204, 0));
         btnStudent.setBackground(new Color(51, 204, 0));
         btnStudentGrade.setBackground(new Color(51, 204, 0));
-        btnOnlineCourse.setBackground(new Color(51, 204, 0));
-        btnOnsiteCourse.setBackground(new Color(51, 204, 0));
+        btnCourse.setBackground(new Color(51, 204, 0));
     }//GEN-LAST:event_btnCourseInstructorActionPerformed
 
-    private void btnOnlineCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnlineCourseActionPerformed
+    private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
-        
-        jPanel4.add(online);
+
+        jPanel4.add(courseForm);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
 
-        btnOnlineCourse.setBackground(Color.blue);
+        btnCourse.setBackground(Color.blue);
         btnHomePage.setBackground(new Color(51, 204, 0));
         btnTeacher.setBackground(new Color(51, 204, 0));
         btnStudent.setBackground(new Color(51, 204, 0));
         btnStudentGrade.setBackground(new Color(51, 204, 0));
         btnCourseInstructor.setBackground(new Color(51, 204, 0));
-        btnOnsiteCourse.setBackground(new Color(51, 204, 0));
-    }//GEN-LAST:event_btnOnlineCourseActionPerformed
-
-    private void btnOnsiteCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnsiteCourseActionPerformed
-        // xóa tất cả những giao diện hiển thị trong jpanel4
-        jPanel4.removeAll();
-
-        jPanel4.add(onsiteForm);
-
-        jPanel4.revalidate(); // Revalidate to reflect the changes
-        jPanel4.repaint();    // Repaint to refresh the display
-
-        btnOnsiteCourse.setBackground(Color.blue);
-        btnHomePage.setBackground(new Color(51, 204, 0));
-        btnTeacher.setBackground(new Color(51, 204, 0));
-        btnStudent.setBackground(new Color(51, 204, 0));
-        btnStudentGrade.setBackground(new Color(51, 204, 0));
-        btnOnlineCourse.setBackground(new Color(51, 204, 0));
-        btnCourseInstructor.setBackground(new Color(51, 204, 0));
-    }//GEN-LAST:event_btnOnsiteCourseActionPerformed
+    }//GEN-LAST:event_btnCourseActionPerformed
 
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
         // xóa tất cả những giao diện hiển thị trong jpanel4
@@ -459,8 +418,7 @@ public class menuForm extends javax.swing.JFrame {
         btnTeacher.setBackground(new Color(51, 204, 0));
         btnStudentGrade.setBackground(new Color(51, 204, 0));
         btnCourseInstructor.setBackground(new Color(51, 204, 0));
-        btnOnlineCourse.setBackground(new Color(51, 204, 0));
-        btnOnsiteCourse.setBackground(new Color(51, 204, 0));
+        btnCourse.setBackground(new Color(51, 204, 0));
     }//GEN-LAST:event_btnStudentActionPerformed
 
     public static void main(String args[]) {
@@ -475,10 +433,9 @@ public class menuForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCourse;
     private javax.swing.JButton btnCourseInstructor;
     private javax.swing.JButton btnHomePage;
-    private javax.swing.JButton btnOnlineCourse;
-    private javax.swing.JButton btnOnsiteCourse;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnStudentGrade;
     private javax.swing.JButton btnTeacher;
@@ -488,7 +445,6 @@ public class menuForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -496,6 +452,5 @@ public class menuForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     // End of variables declaration//GEN-END:variables
 }

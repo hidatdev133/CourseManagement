@@ -57,4 +57,21 @@ public class DepartmentDAL extends  ConnectDB{
         }
         return de;
      }
+     
+     public String getAdministrator(int id){
+         String name = "";
+         try {
+             String sql = "SELECT Person.FirstName , Person.LastName FROM Person , Department WHERE Department.Administrator = Person.PersonID AND Department.Administrator = " + id;
+             ResultSet rs = this.doReadQuery(sql);
+             while(rs.next()){
+                 String firstName =rs.getString("FirstName");
+                 String lastName = rs.getString("LastName");
+                 name = firstName.concat(" "+ lastName);
+             }
+             
+         } catch (Exception e) {
+             System.out.println(e);
+         }
+         return name ;
+     }
 }
