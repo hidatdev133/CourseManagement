@@ -45,12 +45,12 @@ public class CourseDAL extends ConnectDB {
     public int addCourse(Course course){
         try{
             Connection con=ConnectDB.getConnection();
-            String sql="INSERT INTO `course`(`Title`, `Credits`, `DepartmentID`) VALUES (?,?,?)";
+            String sql="insert into course values(?,?,?,?)";
             PreparedStatement pre=con.prepareStatement(sql);
-//            pre.setInt(1, course.getCourseID());
-            pre.setString(1, course.getTitle());
-            pre.setInt(2, course.getCredit());
-            pre.setInt(3, course.getDepartmentID());
+            pre.setInt(1, course.getCourseID());
+            pre.setString(2, course.getTitle());
+            pre.setInt(3, course.getCredit());
+            pre.setInt(4, course.getDepartmentID());
             return pre.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();

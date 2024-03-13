@@ -290,6 +290,20 @@ public class StudentGradeDAL extends ConnectDB {
         return searchResult;
     }
 
+    public int getAmountStudentByIDCourse(int id){
+        try{
+            String sql="SELECT COUNT(studentgrade.StudentID) FROM studentgrade  WHERE studentgrade.CourseID="+id;
+            ResultSet rs=this.doReadQuery(sql);
+            while(rs.next()){
+              return rs.getInt(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+    }
+        return 0;
+    }
+
+
     public int getMaxEnrollmentID() {
         try {
             String sql = "SELECT MAX(EnrollmentID) AS MaxEnrollmentID FROM studentgrade";

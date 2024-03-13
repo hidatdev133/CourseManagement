@@ -15,6 +15,8 @@ import DAL.Course.OnlineCourse;
 import DAL.Course.OnsiteCourse;
 import UI.CourseOnline.editOnlineCourse;
 import UI.CourseOnline.inforOnlineCourseForm;
+import UI.OnsiteCourse.OnsiteCourseFormDetail;
+import UI.OnsiteCourse.editOnsiteCourseForm;
 import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -444,8 +446,12 @@ public class CourseForm extends javax.swing.JPanel {
             editOnlineCourse edit = new editOnlineCourse(this, onl);
             edit.setVisible(true);
         } else {
+            OnsiteCourse onsite=onsiteCourseBLL.getOnsiteCourseByID(id_course);
+            editOnsiteCourseForm editOnsiteForm=new editOnsiteCourseForm(this, onsite);
+            editOnsiteForm.setVisible(true);
             
         }
+        
         
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -463,7 +469,16 @@ public class CourseForm extends javax.swing.JPanel {
         } else {
             int output = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete this course?","Delele online course",JOptionPane.YES_NO_OPTION );
             if (output == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, onlineBLL.deleteOnlCourse(id_course));
+                if(onlineBLL.isOnlineCourse(id_course)){
+                     JOptionPane.showMessageDialog(this, onlineBLL.deleteOnlCourse(id_course));
+                }else if(onsiteCourseBLL.isOnsiteCourse(id_course)){
+                   if(onsiteCourseBLL.deleteonsiteCourse(id_course)){
+                       JOptionPane.showMessageDialog(this, "Delete Successful!");
+                }else{
+                       JOptionPane.showConfirmDialog(this, "Delete Failed!");
+                   }
+                }
+               
                 loadDataToTableCourses();
             }
 
@@ -506,6 +521,12 @@ public class CourseForm extends javax.swing.JPanel {
                                OnlineCourse onl = onlineBLL.findOnlCourseByID(id);
                                inforOnlineCourseForm inf = new inforOnlineCourseForm(this, onl);
                                inf.setVisible(true);
+                           }
+                           if(onsiteCourseBLL.isOnsiteCourse(id)==true){
+                             
+                               OnsiteCourse onsite=onsiteCourseBLL.getOnsiteCourseByID(id);
+                               OnsiteCourseFormDetail onsiteform=new OnsiteCourseFormDetail(this, onsite);
+                               onsiteform.setVisible(true);
                            }
                            
                 }

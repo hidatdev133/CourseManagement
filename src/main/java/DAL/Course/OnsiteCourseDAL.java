@@ -10,9 +10,10 @@ import java.util.List;
 public class OnsiteCourseDAL extends ConnectDB{
   public ArrayList readOnsiteCourse(){
       ArrayList<OnsiteCourse>onsiteCourseList=new ArrayList<>();
-     
       try{
-           String sql="SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.Location,onsitecourse.Days,onsitecourse.Time\n" +
+           String sql="SELECT course.CourseID,course.Title"
+                   + ",course.Credits,course.DepartmentID,onsitecourse.Location,"
+                   + "onsitecourse.Days,onsitecourse.Time\n" +
                     "FROM onsitecourse,course\n" +
                     "WHERE onsitecourse.CourseID=course.CourseID";
            ResultSet rs=this.doReadQuery(sql);
@@ -86,9 +87,7 @@ public class OnsiteCourseDAL extends ConnectDB{
                 "WHERE onsitecourse.CourseID LIKE '%"+hint+"%' OR onsitecourse.Location LIKE'%"+hint+"%'"
                  + "OR onsitecourse.Days LIKE '%"+hint+"%' OR onsitecourse.Time LIKE '%"+hint+"%' "
                  + "OR course.Title LIKE '%"+hint+"%' OR course.Credits LIKE '%"+hint+"%' "
-                 + "OR course.DepartmentID LIKE '%"+hint+"%'";
-        
-                
+                 + "OR course.DepartmentID LIKE '%"+hint+"%'";   
         PreparedStatement pre=con.prepareCall(sql);
         ResultSet rs=pre.executeQuery();
          while(rs.next()){
@@ -102,7 +101,6 @@ public class OnsiteCourseDAL extends ConnectDB{
              onsite.setTime(rs.getString("Time"));
              onsiteCourseListSearch.add(onsite);
          }
-         
  }catch(Exception e){
      e.printStackTrace();
  }
@@ -123,4 +121,49 @@ public class OnsiteCourseDAL extends ConnectDB{
      }
      return listcourseidStudent;
  }
+ public boolean isOnsiteCourse(int id){
+     try{
+         String sql="SELECT * from course, onsitecourse WHERE course.CourseID=onsitecourse.CourseID and course.CourseID="+id;
+         ResultSet rs=this.doReadQuery(sql);
+        while(rs.next()){
+             return true;
+         }
+     }catch(Exception e){
+         e.printStackTrace();
+     }
+     return false;
+ }
+ public OnsiteCourse getOnsiteCourseByID(int id){ 
+     OnsiteCourse onsite=new OnsiteCourse();
+     try{
+         String sql="select * from course, onsitecourse where course.CourseID=onsitecourse.CourseID and onsitecourse.CourseID="+id;
+         ResultSet rs=this.doReadQuery(sql);
+         while(rs.next()){
+             onsite.setCourseID(rs.getInt("CourseID"));
+             onsite.setTitle(rs.getString("title"));
+             onsite.setCredits(rs.getInt("Credits"));
+             onsite.setDepartmentID(rs.getInt("DepartmentID"));
+             onsite.setLocation(rs.getString("Location"));
+             onsite.setDays(rs.getString("Days"));
+             onsite.setTime(rs.getString("Time"));
+         }
+         }
+         catch(Exception e){
+                 e.printStackTrace();
+                 }
+     return onsite;
+ }
+  public int CountLocation(String location){
+        try{
+            String sql="select count(onsitecourse.CourseID) from onsitecourse where onsitecourse.Location= '"+location+"'";
+            ResultSet rs=this.doReadQuery(sql);
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
 }
