@@ -24,7 +24,12 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>9.4.0.jre11</version> <!-- Use the latest version available -->
         </dependency>
-        
+        <dependency>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.5</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
     <properties>
