@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class ConnectDB {
 
-    private static Connection con;
+    public static Connection con;
     private static Statement st;
     private static String host, port, dbName, dbUser, dbPassword;
 

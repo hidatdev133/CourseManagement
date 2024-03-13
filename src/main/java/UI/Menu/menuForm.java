@@ -1,5 +1,6 @@
 package UI.Menu;
 import UI.Course.CourseForm;
+import UI.CourseInstructor.CourseInstructorPanel;
 import UI.Student.studentForm;
 import UI.StudentGrade.studenGradePanel;
 import UI.Teacher.teacherPanel;
@@ -12,7 +13,7 @@ public class menuForm extends javax.swing.JFrame {
     CourseForm courseForm = new CourseForm();
     studentForm stdf = new studentForm();
     teacherPanel teacherPanel = new teacherPanel();
-
+    CourseInstructorPanel CIPanel = new CourseInstructorPanel();
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -376,7 +377,7 @@ public class menuForm extends javax.swing.JFrame {
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
 
-        jPanel4.add(sgp);
+        jPanel4.add(CIPanel);
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display
