@@ -79,4 +79,20 @@ public class CourseInstructorDAL extends ConnectDB{
         }
         return result ;
     }
+    
+    public String getNameTeacherOfCourse(int id){
+        String name = "" ;
+        try {
+            String sql = "SELECT * FROM courseinstructor , person WHERE courseinstructor.PersonID = person.PersonID AND person.HireDate IS NOT NULL AND courseinstructor.CourseID = " +id;
+            ResultSet rs = this.doReadQuery(sql);
+            while(rs.next()){
+                String firstname = rs.getString("Firstname");
+                String lastname = rs.getString("Lastname");
+                name = firstname.concat(" "+ lastname);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return name ;
+    }
 }

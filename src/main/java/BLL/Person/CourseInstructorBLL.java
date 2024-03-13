@@ -8,4 +8,8 @@ public class CourseInstructorBLL {
     public boolean isCourseInstructed(int id){
         return courseInstructorDAL.isCourseInstructed(id);
     }
+    
+    public String getNameTeacherOfCourse(int id){
+        return courseInstructorDAL.getNameTeacherOfCourse(id);
+    }
 }
