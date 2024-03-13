@@ -491,52 +491,120 @@ public class StudentGradeDAL extends ConnectDB {
     }
 
     //------------------------------------------------------------------
-    public StudentGrade readStudenGradeByIDs(int courseID, int studentID) {
-        String sql = "SELECT\n"
-                + "    sg.CourseID,\n"
-                + "    sg.StudentID,\n"
-                + "    sg.Grade,\n"
-                + "    c.Title,\n"
-                + "    c.Credits,\n"
-                + "    c.DepartmentID,\n"
-                + "    oc.url,\n"
-                + "    oc.Location,\n"
-                + "    oc.Days,\n"
-                + "    oc.Time\n"
-                + "FROM\n"
-                + "    StudentGrade sg\n"
-                + "INNER JOIN Course c ON sg.CourseID = c.CourseID\n"
-                + "LEFT JOIN OnlineCourse oc ON sg.CourseID = oc.CourseID\n"
-                + "LEFT JOIN OnsiteCourse os ON sg.CourseID = os.CourseID\n"
-                + "WHERE\n"
-                + "    sg.CourseID = ? AND sg.StudentID = ?;";
-        StudentGrade studentGrade = null;
-
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
-            preparedStatement.setInt(1, courseID);
-            preparedStatement.setInt(2, studentID);
-            ResultSet rs = preparedStatement.executeQuery();
+    public int getCredits(int courseID) {
+        try {
+            String sql = "SELECT Credits FROM Course WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                studentGrade = new StudentGrade();
-                studentGrade.setCourseID(courseID);
-                studentGrade.setStudentID(studentID);
-                studentGrade.setCourseName(rs.getString("Title"));
-                studentGrade.setGrade(rs.getFloat("Grade"));
-                studentGrade.setTime(rs.getString("Time"));
-                studentGrade.setDays(rs.getString("Days"));
-                studentGrade.setLocation(rs.getString("Location"));
-                studentGrade.setStudentName(rs.getString("TeacherName"));
-                studentGrade.setUrl(rs.getString("Url"));
-                studentGrade.setCredits(rs.getString("Credits"));
-                studentGrade.setDepartmendID(rs.getString("DepartmentID"));
-                
-
+                return rs.getInt("Credits");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentGradeDAL.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return 0; // Hoặc giá trị mặc định khác tùy thuộc vào yêu cầu của bạn
+    }
 
-        return studentGrade;
+    public int getDepartmentID(int courseID) {
+        try {
+            String sql = "SELECT DepartmentID FROM Course WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("DepartmentID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Hoặc giá trị mặc định khác tùy thuộc vào yêu cầu của bạn
+    }
+
+    public boolean isOnlineCourse(int courseID) {
+        try {
+            String sql = "SELECT * FROM OnlineCourse WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isOnsiteCourse(int courseID) {
+        try {
+            String sql = "SELECT * FROM OnsiteCourse WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public String getLocation(int courseID) {
+        try {
+            String sql = "SELECT Location FROM OnsiteCourse WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Location");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getDays(int courseID) {
+        try {
+            String sql = "SELECT Days FROM OnsiteCourse WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Days");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getTime(int courseID) {
+        try {
+            String sql = "SELECT Time FROM OnsiteCourse WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Time");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getUrl(int courseID) {
+        try {
+            String sql = "SELECT Url FROM OnlineCourse WHERE CourseID = ?";
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Url");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

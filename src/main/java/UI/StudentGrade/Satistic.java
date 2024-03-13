@@ -432,7 +432,7 @@ public void dataScore() {
             public void run() {
                 Satistic a = new Satistic();
                 a.setVisible(true);
-                a.setLocationRelativeTo(null);
+                
                 
             }
         });

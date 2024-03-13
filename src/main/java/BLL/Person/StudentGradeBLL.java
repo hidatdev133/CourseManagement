@@ -69,8 +69,35 @@ public class StudentGradeBLL {
     }
     //----------------------------------------
 
-    public StudentGrade readStudenGradeByIDs(int courseID, int studentID) {
-        return studentGradeDAL.readStudenGradeByIDs(courseID, studentID);
+    public int getCredits(int courseID) {
+        return studentGradeDAL.getCredits(courseID);
     }
 
+    public int getDepartmentID(int courseID) {
+        return studentGradeDAL.getDepartmentID(courseID);
+    }
+
+    public boolean isOnlineCourse(int courseID) {
+        return studentGradeDAL.isOnlineCourse(courseID);
+    }
+
+    public boolean isOnsiteCourse(int courseID) {
+        return studentGradeDAL.isOnsiteCourse(courseID);
+    }
+
+    public String getLocation(int courseID) {
+        return studentGradeDAL.getLocation(courseID);
+    }
+
+    public String getDays(int courseID) {
+        return studentGradeDAL.getDays(courseID);
+    }
+
+    public String getTime(int courseID) {
+        return studentGradeDAL.getTime(courseID);
+    }
+
+    public String getUrl(int courseID) {
+        return studentGradeDAL.getUrl(courseID);
+    }
 }

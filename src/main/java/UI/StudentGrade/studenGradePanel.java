@@ -12,7 +12,10 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -27,7 +30,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class studenGradePanel extends javax.swing.JPanel {
 
-    private Object[] stlistStu, stlistCour;
     DefaultTableModel dtm;
     StudentGradeBLL studentGradeBLL;
     private List<List<Object>> newRowsList = new ArrayList<>();
@@ -108,6 +110,7 @@ public class studenGradePanel extends javax.swing.JPanel {
         searchcb = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
         btnSatistic = new javax.swing.JButton();
+        btnShowDetail = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(950, 513));
@@ -127,11 +130,6 @@ public class studenGradePanel extends javax.swing.JPanel {
         ));
         jtStudentGrade.setToolTipText("");
         jtStudentGrade.setRowHeight(30);
-        jtStudentGrade.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtStudentGradeMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtStudentGrade);
         if (jtStudentGrade.getColumnModel().getColumnCount() > 0) {
             jtStudentGrade.getColumnModel().getColumn(3).setResizable(false);
@@ -187,6 +185,13 @@ public class studenGradePanel extends javax.swing.JPanel {
             }
         });
 
+        btnShowDetail.setText("ShowDetail");
+        btnShowDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowDetailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,7 +205,9 @@ public class studenGradePanel extends javax.swing.JPanel {
                             .addComponent(btnSatistic, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                             .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowDetail))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -223,7 +230,9 @@ public class studenGradePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(45, Short.MAX_VALUE)
-                        .addComponent(btnSatistic))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSatistic)
+                            .addComponent(btnShowDetail)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -433,24 +442,58 @@ public class studenGradePanel extends javax.swing.JPanel {
         tk.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnSatisticActionPerformed
 
-    private void jtStudentGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtStudentGradeMouseClicked
-        if (evt.getClickCount() == 2) { // Kiểm tra xem double click đã xảy ra hay không
-            int selectedRow = jtStudentGrade.getSelectedRow();
-            if (selectedRow != -1) { // Kiểm tra xem đã chọn một dòng hay chưa
-                int courseID = (int) jtStudentGrade.getValueAt(selectedRow, 1);
-                int studentID = (int) jtStudentGrade.getValueAt(selectedRow, 2);
+    private void btnShowDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowDetailActionPerformed
+        int selectedRow = jtStudentGrade.getSelectedRow();
+        if (selectedRow != -1) {
+            int courseID = (int) jtStudentGrade.getValueAt(selectedRow, 1);
+            int studentID = (int) jtStudentGrade.getValueAt(selectedRow, 2);
+            Object gradeObj = jtStudentGrade.getValueAt(selectedRow, 5);
 
-                // Tạo một đối tượng StudentGrade từ courseID và studentID
-                StudentGrade selectedStudentGrade = new StudentGrade(); // Thay bằng cách lấy dữ liệu từ cơ sở dữ liệu hoặc bất kỳ nguồn dữ liệu nào khác
-                selectedStudentGrade.setCourseID(courseID);
-                selectedStudentGrade.setStudentID(studentID);
-
-                // Hiển thị thông tin chi tiết của sinh viên
-                inforStudentGrade detail = new inforStudentGrade(this, selectedStudentGrade);
-                detail.setVisible(true);
+            // Kiểm tra kiểu dữ liệu của giá trị "Grade"
+            BigDecimal grade = BigDecimal.ZERO; // Giá trị mặc định
+            if (gradeObj instanceof BigDecimal) {
+                grade = (BigDecimal) gradeObj;
+            } else if (gradeObj instanceof String) {
+                try {
+                    grade = new BigDecimal((String) gradeObj);
+                } catch (NumberFormatException e) {
+                    // Xử lý lỗi khi không thể chuyển đổi thành BigDecimal
+                    JOptionPane.showMessageDialog(this, "Invalid grade format");
+                    return;
+                }
             }
+
+            // Hiển thị thông tin chi tiết của sinh viên và điểm
+            displayStudentGradeInformation(courseID, studentID, grade);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row to show detail.");
         }
-    }//GEN-LAST:event_jtStudentGradeMouseClicked
+    }//GEN-LAST:event_btnShowDetailActionPerformed
+
+    private void displayStudentGradeInformation(int courseID, int studentID, BigDecimal grade) {
+        String courseName = studentGradeBLL.getTitle(courseID);
+        int credits = studentGradeBLL.getCredits(courseID);
+        int departmentID = studentGradeBLL.getDepartmentID(courseID);
+        String location = "";
+        String days = "";
+        String time = "";
+        String url = "";
+
+        if (studentGradeBLL.isOnlineCourse(courseID)) {
+            url = studentGradeBLL.getUrl(courseID);
+        } else if (studentGradeBLL.isOnsiteCourse(courseID)) {
+            location = studentGradeBLL.getLocation(courseID);
+            days = studentGradeBLL.getDays(courseID);
+            time = studentGradeBLL.getTime(courseID);
+        }
+
+        String studentName = studentGradeBLL.getStudentName(studentID);
+
+        // Tạo và hiển thị form thông tin sinh viên và điểm
+        inforStudentGrade infoGrade = new inforStudentGrade(courseID, courseName, credits, location, studentID, departmentID, days, studentName, grade, time, url);
+        infoGrade.setVisible(true);
+        infoGrade.setLocationRelativeTo(null);
+    }
 
     private boolean isValidCourseAndStudent(int row) {
         try {
@@ -487,6 +530,7 @@ public class studenGradePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnInput;
     private javax.swing.JButton btnSatistic;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnShowDetail;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtStudentGrade;
