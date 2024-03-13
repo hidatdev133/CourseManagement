@@ -35,6 +35,24 @@ public class TeacherDAL extends ConnectDB {
         return teacherList;
     }
     
+     public ArrayList<Integer> readDSIDbyOrdered() {
+
+        ArrayList<Integer> list = new ArrayList<>();
+        try {
+            String query = "SELECT PersonID FROM person WHERE HireDate>0 ORDER BY PersonID ASC";
+            ResultSet rs = this.doReadQuery(query);
+            if (rs != null) {
+                while (rs.next()) {
+                    int data = rs.getInt("PersonID");
+                    list.add(data);
+                }
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     public int insertTeacherDAL(Teacher teacher) {
         int generatekey = 0;
 
@@ -113,5 +131,23 @@ public class TeacherDAL extends ConnectDB {
             e.printStackTrace();
         }
         return teacherList;
+    }
+    
+    public ArrayList<String> readDSID() {
+
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            String query = "SELECT PersonID FROM person WHERE HireDate>0";
+            ResultSet rs = this.doReadQuery(query);
+            if (rs != null) {
+                while (rs.next()) {
+                    String data = rs.getString("PersonID");
+                    list.add(data);
+                }
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return list;
     }
 }

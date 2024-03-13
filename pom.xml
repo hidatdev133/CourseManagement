@@ -24,7 +24,22 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>9.4.0.jre11</version> <!-- Use the latest version available -->
         </dependency>
+<<<<<<< Updated upstream
         
+=======
+        <dependency>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.5</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
+            <type>jar</type>
+        </dependency>
+>>>>>>> Stashed changes
     </dependencies>
     
     <properties>

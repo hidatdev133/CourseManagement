@@ -1,7 +1,13 @@
 package UI.Menu;
+<<<<<<< Updated upstream
 
 
 import UI.CourseInstructor.courseInstructorPanel;
+=======
+import UI.Course.CourseForm;
+import UI.CourseInstructor.CourseInstructorPanel;
+import UI.Student.studentForm;
+>>>>>>> Stashed changes
 import UI.StudentGrade.studenGradePanel;
 import UI.Teacher.teacherPanel;
 import java.awt.BorderLayout;
@@ -12,8 +18,12 @@ public class menuForm extends javax.swing.JFrame {
 
     studenGradePanel sgp = new studenGradePanel();
     teacherPanel teacherPanel = new teacherPanel();
+<<<<<<< Updated upstream
     courseInstructorPanel CI = new courseInstructorPanel();
 
+=======
+    CourseInstructorPanel CIPanel = new CourseInstructorPanel();
+>>>>>>> Stashed changes
     public menuForm() {
         initComponents();
         jPanel4.setLayout(new BorderLayout());
@@ -396,7 +406,11 @@ public class menuForm extends javax.swing.JFrame {
         // xóa tất cả những giao diện hiển thị trong jpanel4
         jPanel4.removeAll();
 
+<<<<<<< Updated upstream
         jPanel4.add(CI);
+=======
+        jPanel4.add(CIPanel);
+>>>>>>> Stashed changes
 
         jPanel4.revalidate(); // Revalidate to reflect the changes
         jPanel4.repaint();    // Repaint to refresh the display

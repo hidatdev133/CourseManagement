@@ -1,5 +1,6 @@
 package BLL.Person;
 
+import DAL.Teacher.TeacherDAL;
 import DAL.Teacher.Teacher;
 import DAL.Teacher.TeacherDAL;
 import java.util.ArrayList;
@@ -32,9 +33,25 @@ public class TeacherBLL {
     public List<Teacher> searchTeacherBLL(String query) {
         return teacherDAL.searchTeacherDAL(query);
     }
+<<<<<<< Updated upstream
 
     public List<Teacher> LoadTeachers() {
         ArrayList list = (ArrayList) teacherDAL.readTeacher();
         return list; 
     }
 }
+=======
+    
+    public static ArrayList<String> readDSID(){
+        TeacherDAL std = new TeacherDAL();
+        ArrayList<String> list = std.readDSID();
+        return list;
+    }
+    
+    public static ArrayList<Integer> readDSIDbyOrdered(){
+        TeacherDAL std = new TeacherDAL();
+        ArrayList<Integer> list = std.readDSIDbyOrdered();
+        return list;
+    }
+}
+>>>>>>> Stashed changes
