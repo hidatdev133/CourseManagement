@@ -137,7 +137,8 @@ public class studenGradePanel extends javax.swing.JPanel {
         }
 
         btnInput.setBackground(new java.awt.Color(0, 161, 255));
-        btnInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
+        btnInput.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/input.png"))); // NOI18N
         btnInput.setText("Input");
         btnInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +147,7 @@ public class studenGradePanel extends javax.swing.JPanel {
         });
 
         btnAdd.setBackground(new java.awt.Color(0, 161, 255));
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/add.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +157,7 @@ public class studenGradePanel extends javax.swing.JPanel {
         });
 
         btnEdit.setBackground(new java.awt.Color(0, 161, 255));
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/edit-st.png"))); // NOI18N
         btnEdit.setText("Save");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +173,7 @@ public class studenGradePanel extends javax.swing.JPanel {
         searchcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CourseID", "StudentID", "Student Name", "Course Name", "Grade" }));
 
         btnSearch.setBackground(new java.awt.Color(0, 161, 255));
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/search (2).png"))); // NOI18N
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +182,9 @@ public class studenGradePanel extends javax.swing.JPanel {
             }
         });
 
+        btnSatistic.setBackground(new java.awt.Color(0, 161, 255));
+        btnSatistic.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/satistic.png"))); // NOI18N
         btnSatistic.setText("Satistic");
         btnSatistic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +192,11 @@ public class studenGradePanel extends javax.swing.JPanel {
             }
         });
 
-        btnShowDetail.setText("ShowDetail");
+        btnShowDetail.setBackground(new java.awt.Color(0, 161, 255));
+        btnShowDetail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnShowDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/detail.png"))); // NOI18N
+        btnShowDetail.setText("Detail");
+        btnShowDetail.setPreferredSize(new java.awt.Dimension(103, 38));
         btnShowDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowDetailActionPerformed(evt);
@@ -202,12 +213,12 @@ public class studenGradePanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSatistic, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                            .addComponent(btnSatistic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnShowDetail))
+                            .addComponent(btnShowDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -221,7 +232,7 @@ public class studenGradePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(133, 133, 133)
                                 .addComponent(jLabel5)))
-                        .addGap(0, 22, Short.MAX_VALUE)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -229,14 +240,14 @@ public class studenGradePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(45, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSatistic)
-                            .addComponent(btnShowDetail)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(41, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnShowDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSatistic))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnEdit)

@@ -218,6 +218,8 @@ public class CourseForm extends javax.swing.JPanel {
         scrollpane = new javax.swing.JScrollPane();
         tbCourse = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 161, 255));
         jLabel1.setText(" COURSES");
@@ -329,7 +331,7 @@ public class CourseForm extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         cbbCourses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Courses", "Onsite Courses", "Online Courses", " " }));
@@ -362,15 +364,13 @@ public class CourseForm extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbbCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
 
         tbCourse.setModel(modelTbOnlCourse);
-        tbCourse.setCellSelectionEnabled(false);
-        tbCourse.setRowSelectionAllowed(true);
         tbCourse.setSelectionBackground(java.awt.SystemColor.activeCaption);
         tbCourse.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbCourse.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -449,6 +449,7 @@ public class CourseForm extends javax.swing.JPanel {
             OnsiteCourse onsite=onsiteCourseBLL.getOnsiteCourseByID(id_course);
             editOnsiteCourseForm editOnsiteForm=new editOnsiteCourseForm(this, onsite);
             editOnsiteForm.setVisible(true);
+            editOnsiteForm.setLocationRelativeTo(null);
             
         }
         
