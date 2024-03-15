@@ -189,6 +189,23 @@ public class CourseInstructorDAL extends ConnectDB {
     return success;
 }
     
+    public String getNameTeacherOfCourse(int id){
+        String name = "" ;
+        try {
+            String sql = "SELECT * FROM courseinstructor , person WHERE courseinstructor.PersonID = person.PersonID AND person.HireDate IS NOT NULL AND courseinstructor.CourseID = " +id;
+            ResultSet rs = this.doReadQuery(sql);
+            while(rs.next()){
+                String firstname = rs.getString("Firstname");
+                String lastname = rs.getString("Lastname");
+                name = firstname.concat(" "+ lastname);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return name ;
+    }
+
+    
    public static List<CourseInstructor> searchCourseByCourseID(String cbSearch, String ID) {
     String sql = "SELECT * FROM courseinstructor WHERE " + cbSearch + " LIKE ?";
     List<CourseInstructor> courseInstructors = new ArrayList<>();

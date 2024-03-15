@@ -6,14 +6,9 @@ package UI.Student;
 
 import BLL.Person.StudentBLL;
 import DAL.Student.Student;
-import com.google.protobuf.TextFormat.ParseException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -70,10 +65,10 @@ public class studentForm extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 161, 255));
         jLabel1.setText("STUDENT");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -87,6 +82,7 @@ public class studentForm extends javax.swing.JPanel {
                 "PersonID", "Lastname", "Firstname", "EnrollmentDate"
             }
         ));
+        jTable1.setRowHeight(30);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -110,6 +106,7 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
+        btnSearch.setBackground(new java.awt.Color(0, 161, 255));
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/search (1).png"))); // NOI18N
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +115,7 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(0, 161, 255));
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/delete (3).png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +124,7 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setBackground(new java.awt.Color(0, 161, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/add.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +133,8 @@ public class studentForm extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/diskette.png"))); // NOI18N
+        btnEdit.setBackground(new java.awt.Color(0, 161, 255));
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/edit-st.png"))); // NOI18N
         btnEdit.setText("Save");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,11 +156,18 @@ public class studentForm extends javax.swing.JPanel {
 
         jLabel5.setText("EnrollmentDate");
 
+<<<<<<< HEAD
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+=======
+        jButton1.setBackground(new java.awt.Color(0, 161, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/reset.png"))); // NOI18N
         jButton1.setText("Reset");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> 96b862710729bacc14372b9346388b72f6605bee
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -196,11 +203,19 @@ public class studentForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtSearch)
+=======
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> 96b862710729bacc14372b9346388b72f6605bee
                         .addGap(24, 24, 24)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -244,9 +259,15 @@ public class studentForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
+                            .addComponent(btnReset)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
+                .addContainerGap())
+=======
                             .addComponent(jButton1))
                         .addContainerGap())
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+>>>>>>> 96b862710729bacc14372b9346388b72f6605bee
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,7 +279,7 @@ public class studentForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPersonIDActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
     txtLastname.setText("");
     txtFirstname.setText("");
     fillTable();
@@ -278,7 +299,7 @@ public class studentForm extends javax.swing.JPanel {
     
     // Gán giá trị mới cho JTextField txtPersonID
     txtPersonID.setText(String.valueOf(maxPersonID));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnResetActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -432,8 +453,8 @@ public class studentForm extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -67,8 +67,8 @@ public class CourseForm extends javax.swing.JPanel {
        modelTbOnlCourse.addColumn("Title of Course");
        modelTbOnlCourse.addColumn("Credits");
        modelTbOnlCourse.addColumn("Department");
-       modelTbOnlCourse.addColumn("Administrator");
-       modelTbOnlCourse.addColumn("No.Students");
+       modelTbOnlCourse.addColumn("Teacher");
+       modelTbOnlCourse.addColumn("Type Of Course");
        
        scrollpane = new JScrollPane();
        scrollpane.setViewportView(tbCourse);
@@ -82,13 +82,17 @@ public class CourseForm extends javax.swing.JPanel {
         int stt = 0;
         for (Course item : listCourse) {
             int id = item.getCourseID();
+            String type = "Onsite";
+            if(onlineBLL.isOnlineCourse(id)){
+                type = "Online";
+            }
             stt ++;
             String title = item.getTitle();
             int credits = item.getCredit();
             Department de = deBLL.findDepartmentByID(item.getDepartmentID());
             String department = de.getName();
-            String administrator = deBLL.getAdministratorName(de.getAdministrator());
-            Object[] data = {stt,id, title, credits , department, administrator};
+            String teacher = courseInstructorBLL.getNameTeacherOfCourse(id);
+            Object[] data = {stt,id, title, credits , department, teacher, type};
             modelTbOnlCourse.addRow(data);
         }
          for(int i = 0; i < tbCourse.getColumnCount(); i++){
@@ -106,8 +110,9 @@ public class CourseForm extends javax.swing.JPanel {
             int credit = item.getCredits();
             Department de = deBLL.findDepartmentByID(item.getDepartmentID());
             String department = de.getName();
-            String administrator = deBLL.getAdministratorName(de.getAdministrator());
-            Object[] data = {stt,id, title,credit,  department, administrator};
+            String teacher = courseInstructorBLL.getNameTeacherOfCourse(id);
+            String type = "Onsite";
+            Object[] data = {stt,id, title, credit , department, teacher, type};
             modelTbOnlCourse.addRow(data);
         }
          for(int i = 0; i < tbCourse.getColumnCount(); i++){
@@ -125,8 +130,9 @@ public class CourseForm extends javax.swing.JPanel {
             int credits = item.getCredit();
             Department de = deBLL.findDepartmentByID(item.getDepartmentID());
             String department = de.getName();
-            String administrator = deBLL.getAdministratorName(de.getAdministrator());
-            Object[] data = {stt,id, title, credits , department, administrator};
+            String teacher = courseInstructorBLL.getNameTeacherOfCourse(id);
+            String type = "Online";
+            Object[] data = {stt,id, title, credits , department, teacher, type};
             modelTbOnlCourse.addRow(data);
         }
          for(int i = 0; i < tbCourse.getColumnCount(); i++){
@@ -167,7 +173,7 @@ public class CourseForm extends javax.swing.JPanel {
        columnModel.getColumn(2).setPreferredWidth(100);
        columnModel.getColumn(3).setPreferredWidth(50);
        columnModel.getColumn(4).setPreferredWidth(150);
-       columnModel.getColumn(5).setPreferredWidth(30);
+       columnModel.getColumn(5).setPreferredWidth(60);
 
     }
     

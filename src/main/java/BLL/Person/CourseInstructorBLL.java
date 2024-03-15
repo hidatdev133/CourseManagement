@@ -56,4 +56,7 @@ public class CourseInstructorBLL {
         return courseInstructorDAL.getTotalCourses(personID);
     }
    
+    public String getNameTeacherOfCourse(int id){
+        return courseInstructorDAL.getNameTeacherOfCourse(id);
+    }
 }
