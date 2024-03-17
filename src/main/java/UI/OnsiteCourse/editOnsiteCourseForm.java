@@ -457,6 +457,7 @@ public class editOnsiteCourseForm extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Please choose TIME");
            return;
        }
+       
        String expression="^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$";
         Pattern pattern =Pattern.compile(expression);
         Matcher matcher=pattern.matcher(txtTime.getText());
@@ -496,7 +497,7 @@ public class editOnsiteCourseForm extends javax.swing.JFrame {
       onsite.setLocation(txtLocation.getText());
       onsite.setTime(txtTime.getText());
        String mess=onsiteBLL.checkTimeInValid(onsite);
-     if(onsitecourse.getLocation().equals(onsite.getLocation())){
+          if(onsitecourse.getLocation().equals(onsite.getLocation())){
         if(mess!=null){
           JOptionPane.showMessageDialog(this, mess);
           return;
@@ -510,6 +511,7 @@ public class editOnsiteCourseForm extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(this, mess);
           return;
       }
+    
        int option=JOptionPane.showConfirmDialog(this, "Are You Sure Edit This Course?", "Edit Onsite Course",JOptionPane.YES_NO_OPTION);
        if(option==JOptionPane.YES_OPTION){
            if(onsiteBLL.editOnsiteCourseBLL(idCourse, txtLocation.getText(),day,txtTime.getText(),txtTitle.getText(),Credit,departmentID)){

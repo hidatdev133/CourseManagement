@@ -5,7 +5,9 @@ import DAL.Course.Course;
 import DAL.Course.CourseDAL;
 import DAL.Course.OnsiteCourse;
 import DAL.Course.OnsiteCourseDAL;
+import DAL.Student.StudentDAL;
 import DAL.StudentGrade.StudentGrade;
+import DAL.StudentGrade.StudentGradeDAL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JCheckBox;
@@ -19,6 +21,8 @@ public class OnsiteCourseBLL {
     private final StudentGradeBLL studentGradeBLL=new StudentGradeBLL();
     private final CourseBLL courseBLL=new CourseBLL();
     private final CourseDAL courseDAL=new CourseDAL();
+    private final OnlineCourseBLL onlineCourseBLL=new OnlineCourseBLL();
+    private final StudentGradeDAL studentDAL=new StudentGradeDAL();
     public ArrayList readOnsiteCourse(){
         return onsiteCourseDAL.readOnsiteCourse();
         }
@@ -57,6 +61,7 @@ public class OnsiteCourseBLL {
         return true;
     }
     else return false;
+    
     }
     public boolean checkCourseID(int courseID){
         List<String> studentList=studentGradeBLL.readStudent();
@@ -76,7 +81,7 @@ public class OnsiteCourseBLL {
       else  return true;
     }
     public boolean deleteonsiteCourse(int courseId){
-      if(courseBLL.deletecoursonsite(courseId)&&onsiteCourseDAL.DeleteOnsiteCourse(courseId)){
+      if(onsiteCourseDAL.DeleteOnsiteCourse(courseId)&&courseBLL.deletecoursonsite(courseId)){
           return true;
       }
       return false;
@@ -228,5 +233,20 @@ public class OnsiteCourseBLL {
      return count;
  }
  
-         
+    
+    public ArrayList getCourse (){
+        return courseDAL.readCourseDAL();
+    }
+    public int getAmoutStudent(int id){
+        return courseBLL.getAmountStudent(id);
+    }
+    public ArrayList listIDCourse(){
+        return courseDAL.readDSID();
+    }
+      public int getAmountStudent(int id){
+        return studentDAL.getAmountStudentByIDCourse(id);
+    }
+      public Course getCourseByID(int id){
+          return onsiteCourseDAL.getCourseByID(id);
+      }
 }
