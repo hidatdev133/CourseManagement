@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class CourseBLL {
     private final CourseDAL courseDAL=new CourseDAL();
     private final StudentGradeDAL studentDAL=new StudentGradeDAL();
-    public ArrayList<String> readDSID() {
+    public ArrayList<Integer> readDSID() {
         CourseDAL std = new CourseDAL();
-        ArrayList<String> list = std.readDSID();
+        ArrayList<Integer> list = std.readDSID();
         return list;
     }
     public ArrayList readCourseBLL(){

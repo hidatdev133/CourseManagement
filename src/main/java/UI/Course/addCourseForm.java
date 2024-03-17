@@ -146,9 +146,6 @@ public class addCourseForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "TIME must be from 7:00:00 to 17:30:00");
             return ;
         }
-        
-        
-        
         String departmentName = modelCbbDepartment.getSelectedItem().toString();
         double budget = Double.parseDouble(txtBudget.getText());
         String startDate = txtStartDate.getText();
@@ -159,7 +156,8 @@ public class addCourseForm extends javax.swing.JFrame {
         int departmentID = departmentBLL.findDepartmentIDByAllInfor(de).getDepartmentID();
         int credit=Integer.parseInt(modelCbbCredits.getSelectedItem().toString());
         
-        String day=onsiteCourseBLL.getDay(checkBoxMonday, checkBoxTuesday, checkBoxWednesday, checkBoxThursday, checkBoxFriday, checkBoxSaturay);
+        String day=onsiteCourseBLL.getDay(checkBoxMonday, checkBoxTuesday, checkBoxWednesday, 
+                checkBoxThursday, checkBoxFriday, checkBoxSaturay);
         
         OnsiteCourse onsitecourse=new OnsiteCourse();
         onsitecourse.setTitle(txtTitle.getText());

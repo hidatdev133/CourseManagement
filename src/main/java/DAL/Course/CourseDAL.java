@@ -8,14 +8,14 @@ import java.sql.PreparedStatement;
 
 
 public class CourseDAL extends ConnectDB {
-    public ArrayList<String> readDSID(){
-        ArrayList<String> list = new ArrayList<>();
+    public ArrayList<Integer> readDSID(){
+        ArrayList<Integer> list = new ArrayList<>();
         try {
             String query = "SELECT CourseID FROM course";
             ResultSet rs = this.doReadQuery(query);
             if(rs !=null){
                 while(rs.next()){
-                    String data = rs.getString("CourseID");
+                    int data = rs.getInt("CourseID");
                     list.add(data);
                 }
             }

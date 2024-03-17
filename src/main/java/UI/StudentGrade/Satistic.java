@@ -150,7 +150,7 @@ public void dataScore() {
         pieDataset.setValue("Good", (scoreGioi * 100) / totalScore);
         pieDataset.setValue("Excellent", (scoreXS * 100) / totalScore);
         pieDataset.setValue("Exeption", (notExist * 100) / totalScore);
-
+       
         JFreeChart pieChart = ChartFactory.createPieChart(
                 "Tỉ lệ chênh lệch điểm".toUpperCase(),
                 pieDataset, false, true, false);

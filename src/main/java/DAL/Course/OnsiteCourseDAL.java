@@ -12,10 +12,10 @@ public class OnsiteCourseDAL extends ConnectDB{
       ArrayList<OnsiteCourse>onsiteCourseList=new ArrayList<>();
       try{
            String sql="SELECT course.CourseID,course.Title"
-                   + ",course.Credits,course.DepartmentID,onsitecourse.Location,"
-                   + "onsitecourse.Days,onsitecourse.Time\n" +
-                    "FROM onsitecourse,course\n" +
-                    "WHERE onsitecourse.CourseID=course.CourseID";
+                  + ",course.Credits,course.DepartmentID,onsitecourse.Location,"
+                  + "onsitecourse.Days,onsitecourse.Time\n" +
+                   "FROM onsitecourse,course\n" +
+                   "WHERE onsitecourse.CourseID=course.CourseID";
            ResultSet rs=this.doReadQuery(sql);
            while(rs.next()){
               OnsiteCourse onsiteCourse=new OnsiteCourse();
@@ -140,7 +140,7 @@ public class OnsiteCourseDAL extends ConnectDB{
          ResultSet rs=this.doReadQuery(sql);
          while(rs.next()){
              onsite.setCourseID(rs.getInt("CourseID"));
-             onsite.setTitle(rs.getString("title"));
+             onsite.setTitle(rs.getString("Title"));
              onsite.setCredits(rs.getInt("Credits"));
              onsite.setDepartmentID(rs.getInt("DepartmentID"));
              onsite.setLocation(rs.getString("Location"));
@@ -152,6 +152,22 @@ public class OnsiteCourseDAL extends ConnectDB{
                  e.printStackTrace();
                  }
      return onsite;
+ }
+ public Course getCourseByID(int id){
+     Course course=new Course();
+     try{
+         String sql="select * from course where course.CourseID="+id;
+         ResultSet rs=this.doReadQuery(sql);
+         while(rs.next()){
+             course.setCourseID(rs.getInt("CourseID"));
+             course.setTitle(rs.getString("Title"));
+             course.setDepartmentID(rs.getInt("DepartmentID"));
+             course.setCredit(rs.getInt("Credits"));
+         }
+     }catch(Exception e){
+         e.printStackTrace();
+     }
+     return course;
  }
   public int CountLocation(String location){
         try{
